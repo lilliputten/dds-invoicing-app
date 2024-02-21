@@ -21,6 +21,9 @@
 .env.test.local
 .env.production.local
 
+# Local data
+/*.sqlite3
+
 # Logs
 logs
 *.log

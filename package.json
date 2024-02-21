@@ -65,6 +65,7 @@
     "start-analyzer": "echo --Start build analyzer-- && cross-env START_ANALYZER=yes npm-run-all cra-build",
     "start-https": "echo --Start dev server with https- && cross-env HTTPS=true craco start",
     "start": "echo --Start dev server-- && cross-env GENERATE_SOURCEMAP=true craco start",
+    "start-django": "echo --Start django dev server-- && python manage.py runserver 8080",
     "test": "craco test --watchAll=false",
     "test-watch": "craco test",
     "pylint": "echo --Run python linter /pyright, venv/-- && pyright .",

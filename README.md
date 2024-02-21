@@ -53,6 +53,17 @@ Freshly installed (venv `.venv-py3.10-django`): 4.2.10
 
 Using 4.2 for compatibility reasons.
 
+To run local dev server, use (for example, on 8080 port):
+
+```
+python manage.py runserver 8080
+```
+
+To migrate data:
+
+```
+python manage.py migrate
+```
 
 ## Python venv maintenance
 
