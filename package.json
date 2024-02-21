@@ -4,43 +4,6 @@
   "timetag": "240221-1717",
   "timestamp": "2024.02.21 17:17 +0700",
   "changed": "2024.02.21, 16:53",
-  "eslint-unused-rules": {
-    "eqeqeq": [
-      "warn",
-      "smart"
-    ],
-    "no-unused-vars": [
-      "warn",
-      {
-        "varsIgnorePattern": "^_",
-        "argsIgnorePattern": "^_"
-      }
-    ]
-  },
-  "eslintConfig": {
-    "extends": [
-      "plugin:prettier/recommended",
-      "react-app",
-      "react-app/jest"
-    ],
-    "rules": {
-      "no-console": "warn",
-      "no-debugger": "warn",
-      "@typescript-eslint/no-unused-vars": [
-        "warn",
-        {
-          "varsIgnorePattern": "^_",
-          "argsIgnorePattern": "^_"
-        }
-      ],
-      "prettier/prettier": [
-        "warn",
-        {
-          "endOfLine": "auto"
-        }
-      ]
-    }
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -53,32 +16,43 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "cross-env": "^7.0.3",
-    "dayjs": "^1.11.10",
-    "dayjs-timezone-iana-plugin": "^0.1.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-prettier": "^5.0.1",
-    "npm-package-user-scripts-list": "^0.1.10",
-    "npm-run-all": "^4.1.5",
-    "patch-package": "^8.0.0",
-    "prettier": "^3.0.3",
-    "rimraf": "^5.0.5",
-    "serve": "^14.2.1",
+  "stylelint-deps": {
     "stylelint": "^15.11.0",
     "stylelint-config-css-modules": "^4.3.0",
     "stylelint-config-recommended-scss": "^13.1.0",
     "stylelint-config-standard": "^34.0.0",
     "stylelint-scss": "^5.3.1"
   },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.23.10",
+    "@babel/plugin-proposal-decorators": "^7.23.9",
+    "@babel/preset-env": "^7.23.9",
+    "cross-env": "^7.0.3",
+    "dayjs": "^1.11.10",
+    "dayjs-timezone-iana-plugin": "^0.1.0",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-import": "^2.28.0",
+    "eslint-plugin-json": "^3.1.0",
+    "eslint-plugin-jsonc": "^2.9.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-yaml": "^0.5.0",
+    "npm-package-user-scripts-list": "^0.1.10",
+    "npm-run-all": "^4.1.5",
+    "patch-package": "^8.0.0",
+    "prettier": "^3.0.3",
+    "rimraf": "^5.0.5",
+    "serve": "^14.2.1",
+    "typescript": "^5.3.3"
+  },
   "scripts": {
     "patch-node-packages": "echo --Patch node packages-- && patch-package",
     "init-publish-submodule": "echo --Install publish submodule /posix commands used/-- && sh ./utils/publish-init.sh",
     "postinstall-OPTIONAL-UNUSED": "echo --Run postinstall tasks-- && npm-run-all init-publish-submodule",
     "clear-cache": "echo --Clear caches-- && rimraf node_modules/.cache && echo Cleared webpack cache && jest --clearCache",
-    "stylelint": "echo --Lint styles-- && stylelint src/**/*.{css,scss,less}",
+    "stylelint": "echo --Lint styles-- && stylelint ./**/*.{css,scss,less}",
     "prettier": "echo --Run prettier-- && prettier --write --cache . | grep -v '(cached)' || true",
-    "eslint": "echo --Lint sources-- && eslint src --ext js,ts,tsx",
+    "eslint": "echo --Lint sources-- && eslint . --ext js,ts,tsx,json,jsonc,yaml",
     "type-check": "echo --Run typescript linter-- && tsc --pretty --noEmit",
     "test-all": "echo --Run all lint & test tasks-- && npm-run-all eslint type-check test && echo --All tests passed--",
     "check-all": "echo --Run all pre-commit check-ups-- && npm-run-all prettier stylelint eslint type-check && echo --All check-ups passed--",
@@ -93,6 +67,8 @@
     "start": "echo --Start dev server-- && cross-env GENERATE_SOURCEMAP=true craco start",
     "test": "craco test --watchAll=false",
     "test-watch": "craco test",
+    "pylint": "echo --Run python linter /pyright, venv/-- && pyright .",
+    "pyformat": "echo --Run python formatter /autopep8, venv/-- && autopep8 .",
     "help": "echo --List all available script commands-- && npm-package-user-scripts-list"
   }
 }

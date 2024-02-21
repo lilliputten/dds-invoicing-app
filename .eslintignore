@@ -1,6 +1,6 @@
 # Enable dot files in root folder
 
-!.*
+!.*.js
 
 # Disable project generated folders
 
@@ -15,6 +15,7 @@
 /build
 /coverage
 /.idea
+/.venv
 /i18n
 /node_modules
 /public
