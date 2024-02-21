@@ -1,14 +1,14 @@
 <!--
-@since 2024.02.16, 14:59
-@changed 2024.02.16, 14:59
+@since 2024.02.21, 16:15
+@changed 2024.02.21, 16:15
 -->
 
-# jsonld-glossary
+# dds-invoicing-app
 
-A static site generator for jsonld-based glossary catalogue.
+The DDS invoicing app.
 
-- Version: 0.0.0
-- Last changes timestamp: 2024.02.16 00:15 +0700
+- Version: 0.0.1
+- Last changes timestamp: 2024.02.21 17:17 +0700
 
 TODO: Add the project description.
 
@@ -19,11 +19,9 @@ TODO: Add the project description.
 
 ## Resources
 
-Repository: https://github.com/lilliputten/jsonld-glossary
+Repository: https://github.com/lilliputten/dds-invoicing-app
 
-Demo deploy server (with a recent build): http://jsonld-glossary.lilliputten.ru/
-
-Glossary sample: https://glossary.ecoinvent.org
+Demo deploy server (with a recent build): None
 
 DDS Logo & style guidelines: https://github.com/Depart-de-Sentier/dds-logo
 

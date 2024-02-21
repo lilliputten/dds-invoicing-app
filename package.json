@@ -1,0 +1,98 @@
+{
+  "name": "react-flow-app",
+  "version": "0.0.1",
+  "timetag": "240221-1717",
+  "timestamp": "2024.02.21 17:17 +0700",
+  "changed": "2024.02.21, 16:53",
+  "eslint-unused-rules": {
+    "eqeqeq": [
+      "warn",
+      "smart"
+    ],
+    "no-unused-vars": [
+      "warn",
+      {
+        "varsIgnorePattern": "^_",
+        "argsIgnorePattern": "^_"
+      }
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "plugin:prettier/recommended",
+      "react-app",
+      "react-app/jest"
+    ],
+    "rules": {
+      "no-console": "warn",
+      "no-debugger": "warn",
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        {
+          "varsIgnorePattern": "^_",
+          "argsIgnorePattern": "^_"
+        }
+      ],
+      "prettier/prettier": [
+        "warn",
+        {
+          "endOfLine": "auto"
+        }
+      ]
+    }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "dayjs": "^1.11.10",
+    "dayjs-timezone-iana-plugin": "^0.1.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "npm-package-user-scripts-list": "^0.1.10",
+    "npm-run-all": "^4.1.5",
+    "patch-package": "^8.0.0",
+    "prettier": "^3.0.3",
+    "rimraf": "^5.0.5",
+    "serve": "^14.2.1",
+    "stylelint": "^15.11.0",
+    "stylelint-config-css-modules": "^4.3.0",
+    "stylelint-config-recommended-scss": "^13.1.0",
+    "stylelint-config-standard": "^34.0.0",
+    "stylelint-scss": "^5.3.1"
+  },
+  "scripts": {
+    "patch-node-packages": "echo --Patch node packages-- && patch-package",
+    "init-publish-submodule": "echo --Install publish submodule /posix commands used/-- && sh ./utils/publish-init.sh",
+    "postinstall-OPTIONAL-UNUSED": "echo --Run postinstall tasks-- && npm-run-all init-publish-submodule",
+    "clear-cache": "echo --Clear caches-- && rimraf node_modules/.cache && echo Cleared webpack cache && jest --clearCache",
+    "stylelint": "echo --Lint styles-- && stylelint src/**/*.{css,scss,less}",
+    "prettier": "echo --Run prettier-- && prettier --write --cache . | grep -v '(cached)' || true",
+    "eslint": "echo --Lint sources-- && eslint src --ext js,ts,tsx",
+    "type-check": "echo --Run typescript linter-- && tsc --pretty --noEmit",
+    "test-all": "echo --Run all lint & test tasks-- && npm-run-all eslint type-check test && echo --All tests passed--",
+    "check-all": "echo --Run all pre-commit check-ups-- && npm-run-all prettier stylelint eslint type-check && echo --All check-ups passed--",
+    "publish": "echo --Publish build /posix commands used/-- && sh ./utils/publish.sh",
+    "build-and-publish": "echo --Build and publish-- && npm-run-all build publish",
+    "patch-build": "echo --Patch build-- && gulp patchBuild",
+    "serve-build": "echo --Serve build /at alternate port 3003/-- && serve build -l 3003",
+    "cra-build": "echo --CRA build-- && craco build",
+    "build": "echo --Make build-- && npm-run-all cra-build patch-build",
+    "start-analyzer": "echo --Start build analyzer-- && cross-env START_ANALYZER=yes npm-run-all cra-build",
+    "start-https": "echo --Start dev server with https- && cross-env HTTPS=true craco start",
+    "start": "echo --Start dev server-- && cross-env GENERATE_SOURCEMAP=true craco start",
+    "test": "craco test --watchAll=false",
+    "test-watch": "craco test",
+    "help": "echo --List all available script commands-- && npm-package-user-scripts-list"
+  }
+}
