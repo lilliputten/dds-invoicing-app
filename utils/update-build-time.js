@@ -65,7 +65,7 @@ console.log('Updated build tag/time:', buildTag, '/', buildTzTime);
 fs.writeFileSync(timetagFileName, buildTag, 'utf8');
 fs.writeFileSync(timestampFileName, buildTzTime, 'utf8');
 
-// Write build info data to use in the source code...
+// Write build info data to use in the source code (if the folder already exists)...
 if (fs.existsSync(srcPath)) {
   fs.writeFileSync(buildInfoJsonFileName, JSON.stringify(getBuildInfo(), undefined, 2) + '\n', 'utf8');
 }

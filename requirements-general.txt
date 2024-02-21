@@ -1,0 +1,5 @@
+# General python requirements
+# @changed 2024.02.21, 17:44
+# vim: ft=conf
+
+Django==4.2.10
