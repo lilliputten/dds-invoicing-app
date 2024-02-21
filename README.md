@@ -49,7 +49,7 @@ python -m pip install Django
 
 Local: 5.0.2
 Fullsp server (reacent venv): 3.2.24
-Freshly installed (venv `.venv-py3.10-django`): 4.2.10
+Freshly installed (venv `.venv-py3.10-django-4.2`): 4.2.10
 
 Using 4.2 for compatibility reasons.
 
