@@ -21,7 +21,7 @@ rootPath = os.path.dirname(os.path.abspath(__file__))
 home = str(Path.home())
 
 # TODO: To load actual venv name from the external config file?
-venv = '.venv-py3.10-django-5.0'  # Python 3.10, Django 5.0
+venv = '.venv-py3.10-django-5'  # Python 3.10, Django 5.0
 #  venv = '.venv-py3.10-flask'  # Python 3.10, Flask 2.0.3
 #  venv = '.virtualenv'  # Default
 
