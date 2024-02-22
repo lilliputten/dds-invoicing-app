@@ -40,11 +40,19 @@ class Application(models.Model):
     option_tshirt = models.BooleanField(default=False)  # pyright: ignore [reportArgumentType]
 
     def __str__(self):
-        return ", ".join(list(filter(None, [
-            str(self.id),
-            "email: " + str(self.email) if self.email else "",
-            "name: " + str(self.name) if self.name else "",
+        """
+        Human-readable representation of the object
+        """
+        info = ", ".join(list(filter(None, [
+            str(self.email) if self.email else "",
+            str(self.name) if self.name else "",
         ])))
+        info = " (" + info + ")" if info else ""
+        info = " ".join(list(filter(None, [
+            str(self.id),
+            info,
+        ])))
+        return info
 
 
 class Choice(models.Model):
