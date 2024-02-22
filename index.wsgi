@@ -10,6 +10,8 @@
 Django wsgi start script
 """
 
+from django.core.wsgi import get_wsgi_application
+import django
 import os  # noqa
 import sys  # noqa
 import time  # noqa
@@ -39,11 +41,9 @@ with open(activate_this) as f:
 sys.path.insert(1, rootPath)  # noqa  # pylint: disable=wrong-import-position
 
 # Start django app...
-import django
 
 # This code is for modern django versions (>1.6)...
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'default_settings')
-from django.core.wsgi import get_wsgi_application
 try:
     application = get_wsgi_application()
 except RuntimeError:
