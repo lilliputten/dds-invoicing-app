@@ -3,10 +3,17 @@ from django.db import models
 from core.constants import dateTimeFormat
 
 
+# TODO:
+# Emails list:
+# - For free applying
+# - To limit people allowed to apply
+
+
 class Application(models.Model):
+
     # Generated:
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    secret_code = models.UUIDField(default=uuid.uuid4, editable=False)
+    secret_code = models.UUIDField(default=uuid.uuid4)  #, editable=False)
     #  secret_code = models.CharField(max_length=100)  # (generated)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
