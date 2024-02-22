@@ -8,6 +8,7 @@ from core.constants import dateTimeFormat
 # - For free applying
 # - To limit people allowed to apply
 
+# See https://docs.djangoproject.com/en/5.0/intro/tutorial04/
 
 class Application(models.Model):
 
@@ -66,6 +67,7 @@ class Application(models.Model):
         return info
 
 
+# TODO: Use choices as options
 class Choice(models.Model):
     application = models.ForeignKey(Application, on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=200)

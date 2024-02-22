@@ -17,7 +17,7 @@ class CustomApplicationForm(forms.ModelForm):
 
 class ApplicationAdmin(admin.ModelAdmin):
     # NOTE: Trying to show non-editable fields (this approach doesn't work)
-    fields = ('secret_code', 'created_at')
+    #  fields = ('secret_code', 'created_at')
     readonly_fields = ('secret_code', 'created_at')
     form = CustomApplicationForm
 
