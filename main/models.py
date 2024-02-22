@@ -1,5 +1,6 @@
 import uuid
 from django.db import models
+from core.constants import dateTimeFormat
 
 
 class Application(models.Model):
@@ -44,10 +45,13 @@ class Application(models.Model):
         Human-readable representation of the object
         """
         info = ", ".join(list(filter(None, [
-            str(self.email) if self.email else "",
-            str(self.name) if self.name else "",
+            str(self.email) if self.email else None,
+            str(self.name) if self.name else None,
+            #  str(self.created_at) if self.created_at else "",
+            self.created_at.strftime(dateTimeFormat)  # pyright: ignore [reportAttributeAccessIssue]
+                if self.created_at else None,
         ])))
-        info = " (" + info + ")" if info else ""
+        info = " (" + info + ")" if info else None
         info = " ".join(list(filter(None, [
             str(self.id),
             info,
