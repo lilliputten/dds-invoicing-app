@@ -24,7 +24,7 @@ echo "Trying to merge current branch into the target..."
 
 git checkout $TARGET_SERVER_BRANCH \
   && git pull && \
-  git merge $CURRENT_BRANCH && \
+  git merge -X theirs $CURRENT_BRANCH && \
   git push && \
   git checkout $CURRENT_BRANCH && \
   echo Ok
