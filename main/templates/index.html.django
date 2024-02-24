@@ -1,3 +1,10 @@
+{# ex: set ft=htmldjango : #}
+{% extends "!base_main.html.django" %}
+
+{% block title %}Test index {{ block.super }}{% endblock %}
+
+{% block body %}
+
 {% if latest_application_list %}
     <ul>
     {% for application in latest_application_list %}
@@ -7,3 +14,5 @@
 {% else %}
     <p>No applications are available.</p>
 {% endif %}
+
+{% endblock body %}

@@ -1,3 +1,4 @@
+{# ex: set ft=htmldjango : #}
 {% extends "!base_main.html.django" %}
 
 {% block title %}Application {{ application.id }} {{ block.super }}{% endblock %}

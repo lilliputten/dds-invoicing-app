@@ -1,0 +1,26 @@
+var webpack = require('webpack');
+var path = require('path');
+
+module.exports = {
+  entry: [
+    'webpack/hot/dev-server',
+    'webpack-hot-middleware/client',
+    // XXX
+    './static/css-generated/_blocks_less.css',
+  ],
+  output: {
+    filename: '_blocks_less.css',
+    path: path.join(__dirname, 'dist'),
+    publicPath: '/dist',
+  },
+  plugins: [new webpack.HotModuleReplacementPlugin()],
+  module: {
+    loaders: [
+      {
+        test: /\.{css,js}?$/,
+        exclude: /node_modules/,
+        loaders: ['react-hot', 'babel'],
+      },
+    ],
+  },
+};

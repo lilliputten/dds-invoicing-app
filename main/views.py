@@ -40,7 +40,7 @@ def detail(request: HttpRequest, application_id: str):
     #      raise Http404("Application does not exist")
     application = get_object_or_404(Application, pk=application_id)
     form = ApplicationForm(instance=application)
-    return render(request, "detail.html", {"application": application, "form": form})
+    return render(request, "detail.html.django", {"application": application, "form": form})
 
 
 def index(request: HttpRequest):
@@ -52,5 +52,5 @@ def index(request: HttpRequest):
     context = {
         "latest_application_list": latest_application_list,
     }
-    template = loader.get_template("index.html")
+    template = loader.get_template("index.html.django")
     return HttpResponse(template.render(context, request))
