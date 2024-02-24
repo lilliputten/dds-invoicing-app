@@ -22,8 +22,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 RUNNING_DEVSERVER = (len(sys.argv) > 1 and sys.argv[1] == 'runserver')
 LOCAL = RUNNING_DEVSERVER
 DEBUG = LOCAL
-DEV_MAKET_MODE = LOCAL and True
+DEV_MAKET_MODE = LOCAL and True  # Try to compile js & css resources on-the-fly
 BLOCKS_FILES_SCAN = DEV_MAKET_MODE
+SHOW_DJANGO_TOOLBAR = True
+COMPRESS_ENABLED = not LOCAL # not DEV_MAKET_MODE
+USE_PRECOMPILERS = False
+USE_FAKE_DB = False
+
+BEAUTIFY_HTML = not LOCAL # COMPRESS_ENABLED
+BEAUTIFY_HTML_OPTIONS = {
+    'REPLACE_BEGINNING_SPACES': False,
+    'REMOVE_FOLDS': True,
+}
 
 # Basic app properties...
 
@@ -31,20 +41,36 @@ APP_NAME = 'main'  # Root app name
 
 # Aux folders...
 
-STATIC_FOLDER = posixpath.join('static', '')
-MEDIA_FOLDER = posixpath.join('media', '')
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-
+STATIC_FOLDER = posixpath.join('static', '')
 STATIC_ROOT = posixpath.join(BASE_DIR, STATIC_FOLDER, '')
 STATIC_URL = posixpath.join('/', STATIC_FOLDER, '')
 
+MEDIA_FOLDER = posixpath.join('media', '')
 MEDIA_ROOT = posixpath.join(BASE_DIR, MEDIA_FOLDER, '')
 MEDIA_URL = posixpath.join('/', MEDIA_FOLDER, '')
 
+BLOCKS_FOLDER = posixpath.join('blocks', '')
+BLOCKS_ROOT = posixpath.join(STATIC_ROOT, BLOCKS_FOLDER, '' )
+
 #  TEMPLATES_PATH = STATIC_FOLDER # posixpath.join(STATIC_FOLDER, 'templates', '')  # TODO?
 
+# Additional locations of static files
+STATICFILES_DIRS = (
+
+    # Put strings here, like '/home/html/static' or 'C:/www/django/static'.
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+)
+
+# List of finder classes that know how to find static files in
+# various locations.
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -74,7 +100,6 @@ INSTALLED_APPS = [
 
     # Extra apps...
     #  'social.apps.django_app.default',
-    #  'sorl.thumbnail',
     #  'bootstrapform',
     'compressor',
 
@@ -105,6 +130,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                APP_NAME+'.context_processors.common_values',  # Pass local context to the templates. @see `main/context_processors.py`
             ],
         },
     },
@@ -170,8 +196,33 @@ SITE_DESCRIPTION = u'DDS Invoicing'
 SITE_KEYWORDS = u'''
 DDS
 Invoicing
+application
 '''
 SITE_KEYWORDS = re.sub(r'\s*[\n\r]+\s*', ', ', SITE_KEYWORDS.strip())
 #  print(u'keywords: %s ' % SITE_KEYWORDS)
 
 if LOCAL: SITE_NAME = 'LOCAL'
+
+
+# pass settings to context
+PASS_VARIABLES = {
+    'DEBUG': DEBUG,
+    'LOCAL': LOCAL,
+    'DEV_MAKET_MODE': DEV_MAKET_MODE,
+    'COMPRESS_ENABLED': COMPRESS_ENABLED,
+    'SITE_NAME': SITE_NAME,
+    'BEAUTIFY_HTML': BEAUTIFY_HTML,
+    'BEAUTIFY_HTML_OPTIONS': BEAUTIFY_HTML_OPTIONS,
+    'BLOCKS_FOLDER': BLOCKS_FOLDER,
+    'STATIC_ROOT': STATIC_ROOT,
+    'BLOCKS_ROOT': BLOCKS_ROOT,
+    'STATIC_URL': STATIC_URL,
+    'SITE_DESCRIPTION': SITE_DESCRIPTION,
+    'SITE_KEYWORDS': SITE_KEYWORDS,
+    #  'ITEM_PER_USER_LIMIT': 20,
+    #  'SITEMAP_LIMIT': 1000,
+    #  'RSS_LIMIT': 100,
+    #  'RELATED_LIMIT': 6,
+    #  'ITEM_PER_PAGE': 10,
+    #  'LOGIN_TO_CONTACT': True,
+}
