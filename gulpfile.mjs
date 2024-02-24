@@ -29,6 +29,9 @@ import {
  * import tap from 'gulp-tap';
  */
 
+/** To force `livereload` module to update content */
+const forceSecondReloadOnWatch = true;
+
 const staticPath = 'static/';
 const generatedPath = staticPath + '_generated/';
 
@@ -39,13 +42,14 @@ const watchOptions = {
   events: 'all',
   /** Omit initial action for watch cycles */
   ignoreInitial: true,
-  delay: 1000,
+  delay: 500,
   // NOTE: There is a bug with styles compiling watching by `livereload-assets-server`: it takes only previous state, needs to make one extra update
 };
 
 // Finish action...
 let isWatchTask = false;
 let finishedHandler = undefined;
+let changedFiles = [];
 /** Use a delay to confirm update of styles for `livereload-assets-server`.
  * Use only if watch task has run.
  */
@@ -58,8 +62,12 @@ function onFinishDelayed(resolve, id = 'unknown') {
   }
   const dateStr = formatDate(null, timeZone, timeTagFormat);
   // eslint-disable-next-line no-console
-  console.log('Finished (' + id + '):', dateStr);
-  fs.writeFile(generatedPath + 'generated.txt', dateStr, resolve);
+  console.log('Finished (' + id + '):', dateStr, changedFiles);
+  changedFiles = [];
+  // NOTE: To force second reload in `livereload` with updated content
+  if (forceSecondReloadOnWatch) {
+    fs.writeFile(generatedPath + '.generated.txt', dateStr, resolve);
+  }
 }
 function onFinish(id = undefined) {
   return new Promise((resolve) => {
@@ -71,6 +79,17 @@ function onFinish(id = undefined) {
     const cb = onFinishDelayed.bind(undefined, resolve, id);
     finishedHandler = setTimeout(cb, delay);
   });
+}
+
+function onWatchChange(fname) {
+  fname = fname.replace(/\\/g, '/');
+  if (fname.startsWith(assetsSrcPath)) {
+    fname = fname.substring(assetsSrcPath.length);
+  }
+  // console.log('[onWatchChange]', fname);
+  if (!changedFiles.includes(fname)) {
+    changedFiles.push(fname);
+  }
 }
 
 // Scripts...
@@ -93,7 +112,7 @@ function compileScripts() {
 gulp.task('compileScripts', compileScripts);
 gulp.task('compileScriptsWatch', () => {
   isWatchTask = true;
-  return gulp.watch(scriptsSrcAll, watchOptions, compileScripts);
+  return gulp.watch(scriptsSrcAll, watchOptions, compileScripts).on('change', onWatchChange);
 });
 
 // Styles...

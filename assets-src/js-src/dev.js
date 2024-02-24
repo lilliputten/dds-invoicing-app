@@ -2,8 +2,6 @@
 
 /* {{{ Development */
 
-window.DEVELOPMENT = true;
-
 window.DebugObjS = function DebugObjS(o) {
   let ss = o + ': ';
   for (const id in o) {
@@ -61,7 +59,7 @@ window.LOG = function LOG() {
 };
 
 function DIM() {
-  if (typeof window.DEVELOPMENT == 'undefined' || !window.DEVELOPMENT) {
+  if (typeof window.DEV == 'undefined' || !window.DEV) {
     return;
   }
   let dimNode = jQuery('#DIM');

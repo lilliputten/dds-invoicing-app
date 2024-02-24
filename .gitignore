@@ -35,6 +35,7 @@ lerna-debug.log*
 # Local files
 /utils/config-local.sh
 /static/CACHE
+/static/_generated/.generated.txt
 
 # Temporariy, swap, log & ignored files
 tsconfig.tsbuildinfo
