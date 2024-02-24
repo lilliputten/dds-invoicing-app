@@ -1,7 +1,7 @@
 # General python requirements
-# @changed 2024.02.21, 17:44
+# @changed 2024.02.24, 23:35
 # vim: ft=conf
 
 Django==5.0.2
 django-compressor==4.4
-
+django-livereload-server==0.5.1
