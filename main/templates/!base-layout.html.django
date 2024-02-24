@@ -1,7 +1,5 @@
 {# ex: set ft=htmldjango : #}
-{% extends "!base_layout.html.django" %}
-
-{% block body_class %}main{% endblock %}
+{% extends "!base-core.html.django" %}
 
 {% block page_header %}
 {{ block.super }}
@@ -21,3 +19,4 @@
 {% block body %}
 {{ block.super }}
 {% endblock body %}
+

@@ -1,9 +1,12 @@
 {# ex: set ft=htmldjango : #}
-{% extends "!base_main.html.django" %}
+{% extends "!base-regular.html.django" %}
+
+{% block body_class %}default{% endblock %}
 
 {% block title %}Application {{ application.id }} {{ block.super }}{% endblock %}
 
 {% block body %}
+{{ block.super }}
 
 {% include 'blocks/debug/debug.django' %}
 

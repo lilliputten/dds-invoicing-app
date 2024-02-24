@@ -2,9 +2,9 @@
 
 /* {{{ Development */
 
-const DEVELOPMENT = true;
+window.DEVELOPMENT = true;
 
-DebugObjS = function DebugObjS(o) {
+window.DebugObjS = function DebugObjS(o) {
   let ss = o + ': ';
   for (const id in o) {
     ss += id;
@@ -13,7 +13,7 @@ DebugObjS = function DebugObjS(o) {
   alert(ss);
 };
 
-LOG = function LOG() {
+window.LOG = function LOG() {
   let s = '';
 
   for (let i = 0; i < arguments.length; i++) {
@@ -61,7 +61,7 @@ LOG = function LOG() {
 };
 
 function DIM() {
-  if (typeof DEVELOPMENT == 'undefined' || !DEVELOPMENT) {
+  if (typeof window.DEVELOPMENT == 'undefined' || !window.DEVELOPMENT) {
     return;
   }
   let dimNode = jQuery('#DIM');

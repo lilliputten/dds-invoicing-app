@@ -65,6 +65,7 @@ overrides:
   - # Raw js project files...
     files: 'assets-src/**/*.js'
     globals:
+      DEVELOPMENT: true
       DebugObjS: true
       LOG: true
 

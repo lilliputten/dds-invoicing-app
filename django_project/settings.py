@@ -33,7 +33,7 @@ print('RUNNING_MOD_WSGI', RUNNING_MOD_WSGI)
 print('LOCAL', LOCAL)
 print('DEV', DEV)
 
-DEV_MAKET_MODE = LOCAL and False  # Try to compile js & css resources on-the-fly, alternatively it's possible to use `livereload-server`
+DEV_MAKET_MODE = LOCAL and False  # Try to compile js & css resources on-the-fly, alternatively it's possible to use `livereload-assets-server`
 BLOCKS_FILES_SCAN = DEV_MAKET_MODE
 SHOW_DJANGO_TOOLBAR = True
 COMPRESS_ENABLED = not LOCAL # not DEV_MAKET_MODE
@@ -201,9 +201,9 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
-USE_I18N = True
+USE_I18N = False
 
-USE_L10N = True
+USE_L10N = False
 
 USE_TZ = True
 

@@ -1,90 +1,27 @@
-/*{{{ Colors */
-
 @primaryLightColor: #8a9;
 @primaryColor: #486;
 @primaryDarkColor: #375;
 @primaryDarkestColor: #3C5343;
 
 // UNUSED?
-@xdark-blue-color: #036;
-@dark-blue-color: #047;
-@medium-blue-color: #157;
-@mood-blue-color: #6ac;
-@extralight-blue-color: #def;
+@xdarkBlueColor: #036;
+@darkBlueColor: #047;
+@mediumBlueColor: #157;
+@moodBlueColor: #6ac;
+@extralightBlueColor: #def;
 
-@dark-green-color: #461;
-@medium-green-color: #9a0;
+@darkGreenColor: #461;
+@mediumGreenColor: #9a0;
 
-@default-text-color: #333;
+@defaultTextColor: #333;
 
-@background-color: #fff;
-@background-color: @extralight-blue-color;
-// @background-color: darken(@extralight-blue-color,5%);
-// @background-color: lighten(@extralight-blue-color,5%);
+@backgroundColor: #fff;
+@backgroundColor: @extralightBlueColor;
+// @backgroundColor: darken(@extralightBlueColor,5%);
+// @backgroundColor: lighten(@extralightBlueColor,5%);
 
-@collapse-width: @grid-float-breakpoint; // =@screen-sm-min=768px ? =@screen-md-min=992px
-@midbar-collapse: @collapse-width;
+@collapseWidth: @grid-float-breakpoint; // =@screen-sm-min=768px ? =@screen-md-min=992px
+@midbarCollapse: @collapseWidth;
 
-@navbar-main-height: 60px;
-@navbar-plus-height: 50px;
-
-/*}}}*/
-/*{{{ Mixins */
-
-.transparent-color (@color, @tr) {
-  color: rgba(red(@color),green(@color),blue(@color),@tr);
-}
-.transparent-background-color (@color, @tr) {
-  background-color: rgba(red(@color),green(@color),blue(@color),@tr);
-}
-.transparent-border-color (@color, @tr) {
-  border-color: rgba(red(@color),green(@color),blue(@color),@tr);
-}
-.trace-border (@color: red, @weight: 1px) {
-  border: @weight solid @color;
-}
-.m-transition (@value1,@value2:X,...) {
-  //@value: ~`"@{arguments}".replace(/[\[\]]|\,\sX/g, '')`;
-  @value: ~`"@{arguments}".replace(/[\[\]]|\,\sX/g, '')`;
-  //@value: @arguments;
-  //transition: @value;
-
-  transition: @value;
-}
-
-.form-control-focus-b (@color: @input-form-glow-color) {
-  @color-rgba: rgba(red(@color), green(@color), blue(@color), .75);
-  border-color: @color;
-  &:focus {
-    border-color: @color;
-    outline: 0;
-    .box-shadow(~"inset 0 2px 1px rgba(0,0,0,.075), 0 0 4px @{color-rgba}");
-  }
-}
-
-.gradient-tr (@start-color,@start-tr,@end-color,@end-tr) {
-  #gradient > .vertical(@start-color: rgba(red(@start-color),green(@start-color),blue(@start-color),@start-tr); @end-color: rgba(red(@end-color),green(@end-color),blue(@end-color),@end-tr));
-}
-
-.content-column-rule(@column-rule) {
-  column-rule: @column-rule;
-}
-.content-column-count(@column-count) {
-  column-count: @column-count;
-}
-.content-column-gap(@column-gap) {
-  column-gap: @column-gap;
-}
-.content-column-width(@column-width) {
-  column-width: @column-width;
-}
-
-.stop-float () {
-  content:'.';
-  visibility:hidden;
-  display:block;
-  height:0;
-  clear:both;
-}
-
-/*}}}*/
+@navbarMainHeight: 60px;
+@navbarPlusHeight: 50px;

@@ -32,43 +32,49 @@ import {
 const staticPath = 'static/';
 const generatedPath = staticPath + '_generated/';
 
+const assetsSrcPath = 'assets-src/';
+
 const watchOptions = {
   // @see: https://gulpjs.com/docs/en/getting-started/watching-files/
   events: 'all',
   /** Omit initial action for watch cycles */
   ignoreInitial: true,
   delay: 1000,
-  // NOTE: There is a bug with styles compiling watching by `livereload-server`: it takes only previous state, needs to make one extra update
+  // NOTE: There is a bug with styles compiling watching by `livereload-assets-server`: it takes only previous state, needs to make one extra update
 };
 
 // Finish action...
 let isWatchTask = false;
 let finishedHandler = undefined;
-/** Use a delay to confirm update of styles for `livereload-server`.
+/** Use a delay to confirm update of styles for `livereload-assets-server`.
  * Use only if watch task has run.
  */
-const finishGenerationDelay = 2000;
-function onFinishDelayed(resolve) {
-  finishedHandler = null;
+const finishGenerationWatchDelay = 2000;
+const finishGenerationNormalDelay = 500;
+function onFinishDelayed(resolve, id = 'unknown') {
+  if (finishedHandler) {
+    clearTimeout(finishedHandler);
+    finishedHandler = null;
+  }
   const dateStr = formatDate(null, timeZone, timeTagFormat);
   // eslint-disable-next-line no-console
-  console.log('finished:', dateStr);
+  console.log('Finished (' + id + '):', dateStr);
   fs.writeFile(generatedPath + 'generated.txt', dateStr, resolve);
 }
-function onFinish() {
+function onFinish(id = undefined) {
   return new Promise((resolve) => {
     if (finishedHandler) {
       clearTimeout(finishedHandler);
     }
     // NOTE: Use delay only for watched tasks
-    const delay = isWatchTask ? finishGenerationDelay : 0;
-    const cb = onFinishDelayed.bind(undefined, resolve);
+    const delay = isWatchTask ? finishGenerationWatchDelay : finishGenerationNormalDelay;
+    const cb = onFinishDelayed.bind(undefined, resolve, id);
     finishedHandler = setTimeout(cb, delay);
   });
 }
 
 // Scripts...
-const scriptsSrcAll = ['assets-src/blocks/**/*.js'];
+const scriptsSrcAll = [assetsSrcPath + 'blocks/**/*.js'];
 const scriptsDest = generatedPath + 'js/';
 function compileScripts() {
   return (
@@ -81,7 +87,7 @@ function compileScripts() {
       .pipe(sourcemaps.write('.'))
       .pipe(gulp.dest(scriptsDest))
       // Delayed final tasks...
-      .on('end', onFinish)
+      .on('end', onFinish.bind(null, 'scripts'))
   );
 }
 gulp.task('compileScripts', compileScripts);
@@ -91,8 +97,8 @@ gulp.task('compileScriptsWatch', () => {
 });
 
 // Styles...
-const stylesSrcAll = ['assets-src/blocks/**/*.less'];
-const stylesSrcEntry = 'assets-src/blocks-index.less';
+const stylesSrcAll = [assetsSrcPath + 'blocks/**/*.less'];
+const stylesSrcEntry = assetsSrcPath + 'blocks-index.less';
 const stylesDest = generatedPath + 'css/';
 const lessConfig = {
   // @see: https://lesscss.org/usage/#less-options
@@ -112,7 +118,7 @@ function compileStyles() {
       .pipe(sourcemaps.write('.'))
       .pipe(gulp.dest(stylesDest))
       // Delayed final tasks...
-      .on('end', onFinish)
+      .on('end', onFinish.bind(null, 'styles'))
   );
 }
 gulp.task('compileStyles', compileStyles);
@@ -123,7 +129,7 @@ gulp.task('compileStylesWatch', () => {
 
 const assetsSrc = [
   // Templates...
-  'assets-src/**/*.django',
+  assetsSrcPath + '**/*.django',
 ];
 function copyAssets() {
   return gulp.src(assetsSrc, { base: './assets-src' }).pipe(gulp.dest(staticPath));
@@ -137,6 +143,7 @@ gulp.task('copyAssetsWatch', () => {
 const updateAllTasks = [
   // Watch all tasks...
   'compileStyles',
+  'compileScripts',
   'copyAssets',
 ].filter(Boolean);
 gulp.task('updateAll', gulp.parallel.apply(gulp, updateAllTasks));

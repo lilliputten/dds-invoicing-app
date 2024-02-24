@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * @module debug
  */
@@ -8,4 +6,3 @@
 jQuery(document).ready(function () {
   // TODO...
 });
-//# sourceMappingURL=scripts.js.map

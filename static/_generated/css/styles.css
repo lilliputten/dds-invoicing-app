@@ -1,29 +1,32 @@
-/*{{{ Colors */
-/*}}}*/
-/*{{{ Mixins */
-/*}}}*/
-/*{{{ body */
+/**
+ * @module body
+ */
 html,
 html a {
-  -webkit-font-smoothing: antialiased;
+  /* -webkit-font-smoothing: antialiased; */
 }
 body {
   background-color: #def;
+  /*
   padding-top: 100px;
-  transition: padding 0.25s;
-}
-@media (min-width: 992px) {
-  body {
+  .transition(padding .25s);
+  @media (min-width: @screen-md-min) {
     padding-top: 140px;
   }
+  &.main {
+    padding-top: 0px;
+  }
+  */
 }
-body.main {
-  padding-top: 0px;
-}
-/*}}}*/
+/**
+ * @module debug
+ */
 label {
   color: blue;
 }
+/**
+ * @module dev
+ */
 .TRACE {
   border: 1px solid red;
 }
