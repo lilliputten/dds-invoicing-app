@@ -1,6 +1,6 @@
 #!/bin/sh
 # @desc Initialize python venv
-# @changed 2024.02.24, 14:31
+# @changed 2024.02.24, 14:48
 
 TARGET_SERVER_BRANCH="server"
 
@@ -18,11 +18,13 @@ fi
 
 CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD`
 
-echo "Trying to merge current branch '$CURRENT_BRANCH' into the '$TARGET_SERVER_BRANCH'..."
+echo "Current branch: $CURRENT_BRANCH"
+echo "Target branch: '$TARGET_SERVER_BRANCH"
+echo "Trying to merge current branch into the target..."
 
 git checkout $TARGET_SERVER_BRANCH \
   && git pull && \
-  git rebase $CURRENT_BRANCH && \
+  git merge $CURRENT_BRANCH && \
   git push && \
   git checkout $CURRENT_BRANCH && \
   echo Ok

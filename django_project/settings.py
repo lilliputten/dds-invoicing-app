@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     # TODO: Update to actual host names
+    'dds-invoicing-server.lilliputten.ru',
+    'dds-invoicing-server.lilliputten.com',
 ]
 
 
