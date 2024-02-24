@@ -11,9 +11,39 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os, posixpath, re
+import sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Determine dev mode...
+
+RUNNING_DEVSERVER = (len(sys.argv) > 1 and sys.argv[1] == 'runserver')
+LOCAL = RUNNING_DEVSERVER
+DEBUG = LOCAL
+DEV_MAKET_MODE = LOCAL and True
+BLOCKS_FILES_SCAN = DEV_MAKET_MODE
+
+# Basic app properties...
+
+APP_NAME = 'main'  # Root app name
+
+# Aux folders...
+
+STATIC_FOLDER = posixpath.join('static', '')
+MEDIA_FOLDER = posixpath.join('media', '')
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/4.2/howto/static-files/
+
+STATIC_ROOT = posixpath.join(BASE_DIR, STATIC_FOLDER, '')
+STATIC_URL = posixpath.join('/', STATIC_FOLDER, '')
+
+MEDIA_ROOT = posixpath.join(BASE_DIR, MEDIA_FOLDER, '')
+MEDIA_URL = posixpath.join('/', MEDIA_FOLDER, '')
+
+#  TEMPLATES_PATH = STATIC_FOLDER # posixpath.join(STATIC_FOLDER, 'templates', '')  # TODO?
 
 
 # Quick-start development settings - unsuitable for production
@@ -26,7 +56,7 @@ SECRET_KEY = 'django-insecure-j!v87tv!k=v7@79h&hydkr3og41uq@z=)euo@+)rbw0a*dpvx@
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    # TODO: Update to actual host names
+    'localhost',
     'dds-invoicing-server.lilliputten.ru',
     'dds-invoicing-server.lilliputten.com',
 ]
@@ -41,6 +71,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Extra apps...
+    #  'social.apps.django_app.default',
+    #  'sorl.thumbnail',
+    #  'bootstrapform',
+    'compressor',
 
     # Local apps...
     'main.apps.MainConfig',
@@ -121,12 +157,21 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
-
-STATIC_URL = '/static/'
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Site config
+
+SITE_NAME = u'DDS Invoicing'
+SITE_DESCRIPTION = u'DDS Invoicing'
+SITE_KEYWORDS = u'''
+DDS
+Invoicing
+'''
+SITE_KEYWORDS = re.sub(r'\s*[\n\r]+\s*', ', ', SITE_KEYWORDS.strip())
+#  print(u'keywords: %s ' % SITE_KEYWORDS)
+
+if LOCAL: SITE_NAME = 'LOCAL'
