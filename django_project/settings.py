@@ -47,6 +47,10 @@ STATIC_FOLDER = posixpath.join('static', '')
 STATIC_ROOT = posixpath.join(BASE_DIR, STATIC_FOLDER, '')
 STATIC_URL = posixpath.join('/', STATIC_FOLDER, '')
 
+ASSETS_FOLDER = posixpath.join('assets-src', '')
+ASSETS_ROOT = posixpath.join(BASE_DIR, ASSETS_FOLDER, '')
+ASSETS_URL = posixpath.join('/', ASSETS_FOLDER, '')
+
 MEDIA_FOLDER = posixpath.join('media', '')
 MEDIA_ROOT = posixpath.join(BASE_DIR, MEDIA_FOLDER, '')
 MEDIA_URL = posixpath.join('/', MEDIA_FOLDER, '')
@@ -62,6 +66,8 @@ STATICFILES_DIRS = (
     # Put strings here, like '/home/html/static' or 'C:/www/django/static'.
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    #  STATIC_ROOT,
+    #  ASSETS_ROOT,  ## Debug only
 )
 
 # List of finder classes that know how to find static files in

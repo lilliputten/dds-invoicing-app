@@ -52,9 +52,9 @@ import {
   prjPath,
 } from './utils/gulp-helpers.js';
 
-const stylesSrcAll = 'static/blocks/**/*.less';
-const stylesSrcAssets = 'static/_blocks_less.less';
-const stylesDest = 'static/css-generated';
+const stylesSrcAll = 'assets-src/blocks/**/*.less';
+const stylesSrcAssets = 'assets-src/_blocks_less.less';
+const stylesDest = 'static/generated/css';
 const lessConfig = {
   paths: [path.join(prjPath, 'static')],
   sourceMaps: true,
