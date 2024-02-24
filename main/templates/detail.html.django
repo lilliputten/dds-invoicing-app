@@ -5,9 +5,7 @@
 
 {% block body %}
 
-<p>Id: {{ application.id }}</p>
-<p>Email: {{ application.email }}</p>
-<p>Name: {{ application.name }}</p>
+Test 2
 
 <form action="{% url 'application:detail' application.id %}" method="post">
 {% csrf_token %}

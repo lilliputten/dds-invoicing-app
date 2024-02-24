@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 RUNNING_DEVSERVER = (len(sys.argv) > 1 and sys.argv[1] == 'runserver')
 LOCAL = RUNNING_DEVSERVER
 DEBUG = LOCAL
-DEV_MAKET_MODE = LOCAL and True  # Try to compile js & css resources on-the-fly
+DEV_MAKET_MODE = LOCAL and False  # Try to compile js & css resources on-the-fly
 BLOCKS_FILES_SCAN = DEV_MAKET_MODE
 SHOW_DJANGO_TOOLBAR = True
 COMPRESS_ENABLED = not LOCAL # not DEV_MAKET_MODE
@@ -112,6 +112,8 @@ INSTALLED_APPS = [
     # Local apps...
     'main.apps.MainConfig',
 ]
+if DEBUG:
+    INSTALLED_APPS.insert(0, 'livereload');
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -122,6 +124,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+if DEBUG:
+    MIDDLEWARE.append('livereload.middleware.LiveReloadScript');
 
 ROOT_URLCONF = 'django_project.urls'
 

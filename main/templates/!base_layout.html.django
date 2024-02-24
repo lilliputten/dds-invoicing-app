@@ -1,3 +1,7 @@
+{% if settings.DEBUG %}
+{% load livereload_tags %}
+{% endif %}
+
 {% load compress %}
 {% load cache %}
 {% load static %}
@@ -116,6 +120,10 @@ less = {
 </script>
 {# }}} Dynamic less js support #}
 <!-- dev maket tools }}} -->{% endif %}
+
+{% if settings.DEBUG %}
+{% livereload_script %}
+{% endif %}
 
 <!-- }}} JS -->
 
