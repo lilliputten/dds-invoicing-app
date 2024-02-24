@@ -1,3 +1,4 @@
+{# ex: set ft=htmldjango : #}
 {% if settings.DEBUG %}
 {% load livereload_tags %}
 {% endif %}
@@ -64,6 +65,8 @@
 {% block body %}
 
 {% include 'blocks/content/messages.django' %}
+
+<p>DEBUG: {{ settings.DEBUG }}</p>
 
 {% endblock body %}
 
