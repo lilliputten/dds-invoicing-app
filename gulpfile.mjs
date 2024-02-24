@@ -7,6 +7,8 @@ import gulp from 'gulp';
 // import gulpRename from 'gulp-rename';
 // import gulpPrettify from 'gulp-html-prettify';
 
+import gulpConcat from 'gulp-concat';
+
 import sourcemaps from 'gulp-sourcemaps';
 import gulpLess from 'gulp-less';
 import gulpAutoprefixer from 'gulp-autoprefixer';
@@ -65,6 +67,7 @@ function compileStyles() {
     .pipe(sourcemaps.init())
     .pipe(gulpLess(lessConfig))
     .pipe(gulpAutoprefixer())
+    .pipe(gulpConcat('styles.css'))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(stylesDest));
 }

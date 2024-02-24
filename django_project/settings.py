@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-import os, posixpath, re
+import posixpath, re
 import sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 RUNNING_DEVSERVER = (len(sys.argv) > 1 and sys.argv[1] == 'runserver')
 LOCAL = RUNNING_DEVSERVER
 DEBUG = LOCAL
-DEV_MAKET_MODE = LOCAL and False  # Try to compile js & css resources on-the-fly
+DEV_MAKET_MODE = LOCAL and False  # Try to compile js & css resources on-the-fly, alternatively it's possible to use `livereload-server`
 BLOCKS_FILES_SCAN = DEV_MAKET_MODE
 SHOW_DJANGO_TOOLBAR = True
 COMPRESS_ENABLED = not LOCAL # not DEV_MAKET_MODE
