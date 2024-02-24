@@ -1,22 +1,9 @@
 /**
  * @module body
  */
-html,
-html a {
-  /* -webkit-font-smoothing: antialiased; */
-}
 body {
-  background-color: #def;
-  /*
-  padding-top: 100px;
-  .transition(padding .25s);
-  @media (min-width: @screen-md-min) {
-    padding-top: 140px;
-  }
-  &.main {
-    padding-top: 0px;
-  }
-  */
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  background-color: #fff;
 }
 /**
  * @module debug
@@ -85,6 +72,37 @@ label {
 }
 #less-error-message-static {
   margin-top: 100px;
+}
+/**
+ * @module bootstrap-theme
+ */
+.btn-default,
+.btn-primary,
+.btn-success,
+.btn-info,
+.btn-warning,
+.btn-danger {
+  transition: all 250ms;
+}
+.btn-primary {
+  background-color: #486;
+  border-color: #3c7759;
+}
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #3c7759;
+  border-color: #33664d;
+}
+.btn-primary:active,
+.btn-primary.active {
+  background-color: #33664d;
+  border-color: #2b5540;
+}
+.btn-primary.disabled,
+.btn-primary:disabled,
+.btn-primary[disabled] {
+  background-color: rgba(68, 136, 102, 0.5);
+  border-color: rgba(68, 136, 102, 0.25);
 }
 
 /*# sourceMappingURL=styles.css.map */

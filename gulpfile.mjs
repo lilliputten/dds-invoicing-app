@@ -62,7 +62,7 @@ function onFinishDelayed(resolve, id = 'unknown') {
   }
   const dateStr = formatDate(null, timeZone, timeTagFormat);
   // eslint-disable-next-line no-console
-  console.log('Finished (' + id + '):', dateStr, changedFiles);
+  console.log('Finished (' + id + '):', dateStr, changedFiles.length ? changedFiles : '');
   changedFiles = [];
   // NOTE: To force second reload in `livereload` with updated content
   if (forceSecondReloadOnWatch) {
@@ -86,7 +86,8 @@ function onWatchChange(fname) {
   if (fname.startsWith(assetsSrcPath)) {
     fname = fname.substring(assetsSrcPath.length);
   }
-  // console.log('[onWatchChange]', fname);
+  // eslint-disable-next-line no-console
+  console.log('Changed:', fname);
   if (!changedFiles.includes(fname)) {
     changedFiles.push(fname);
   }
@@ -143,7 +144,9 @@ function compileStyles() {
 gulp.task('compileStyles', compileStyles);
 gulp.task('compileStylesWatch', () => {
   isWatchTask = true;
-  return gulp.watch(stylesSrcAll, watchOptions, compileStyles);
+  return gulp
+    .watch(stylesSrcAll.concat(stylesSrcEntry), watchOptions, compileStyles)
+    .on('change', onWatchChange);
 });
 
 const assetsSrc = [

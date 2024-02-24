@@ -8,7 +8,7 @@
 {% block body %}
 {{ block.super }}
 
-{% include 'blocks/debug/debug.django' %}
+{% comment %} {% include 'blocks/debug/debug.django' %} {% endcomment %}
 
 <form action="{% url 'application:detail' application.id %}" method="post">
 {% csrf_token %}

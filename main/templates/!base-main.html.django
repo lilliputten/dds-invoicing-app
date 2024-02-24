@@ -6,6 +6,9 @@
 {% block body %}
 {{ block.super }}
 
+<button type="button" class="btn btn-default">Default</button>
+<button type="button" class="btn btn-default" disabled>Disabled</button>
 <button type="button" class="btn btn-primary">Primary</button>
+<button type="button" class="btn btn-primary" disabled>Disabled</button>
 
 {% endblock body %}
