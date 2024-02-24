@@ -21,8 +21,6 @@ CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD`
 echo "Trying to merge current branch '$CURRENT_BRANCH' into the '$TARGET_SERVER_BRANCH'..."
 
 git checkout $TARGET_SERVER_BRANCH \
-TARGET_BRANCH="server"
-
   && git pull && \
   git rebase $CURRENT_BRANCH && \
   git push && \
