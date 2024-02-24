@@ -1,9 +1,10 @@
+"use strict";
+
 /* eslint-env browser, jquery */
 
 /* {{{ Development */
 
 const DEVELOPMENT = true;
-
 DebugObjS = function DebugObjS(o) {
   let ss = o + ': ';
   for (const id in o) {
@@ -12,25 +13,21 @@ DebugObjS = function DebugObjS(o) {
   }
   alert(ss);
 };
-
 LOG = function LOG() {
   let s = '';
-
   for (let i = 0; i < arguments.length; i++) {
     s += arguments[i] + ' ';
   }
   if (arguments.length) {
     s += '<br/>';
   }
-
-  let logNode = jQuery('#LOG');
-
-  if (!logNode.length) {
+  let LOG = jQuery('#LOG');
+  if (!LOG.length) {
     const xTop = 0;
     // if ( jQuery('#DIM').length ) { xTop += 30; }
     jQuery('body').append('<div id="LOG"></div>');
-    logNode = jQuery('#LOG');
-    logNode.css({
+    LOG = jQuery('#LOG');
+    LOG.css({
       // display: 'block',
       overflow: 'hidden',
       'line-height': '200%',
@@ -46,53 +43,40 @@ LOG = function LOG() {
       color: 'rgba(200,200,200,.75)',
       padding: '5px',
       'padding-left': '10px',
-      margin: '10px auto',
+      margin: '10px auto'
     });
-    logNode.click(function () {
+    LOG.click(function () {
       jQuery(this).hide(200).html('');
       return false;
     });
   }
-
-  logNode.html(logNode.html() + s);
-  if (arguments.length && logNode.is(':hidden')) {
-    logNode.show();
+  LOG.html(LOG.html() + s);
+  if (arguments.length && LOG.is(':hidden')) {
+    LOG.show();
   }
 };
-
 function DIM() {
   if (typeof DEVELOPMENT == 'undefined' || !DEVELOPMENT) {
     return;
   }
-  let dimNode = jQuery('#DIM');
+  let DIM = jQuery('#DIM');
   // Create new node if absent...
-  if (!dimNode.length) {
-    jQuery('body').append(
-      '<div id="DIM" style="display: none;" title="Dev info toolbar: Click to hide"></div>',
-    );
-    dimNode = jQuery('#DIM');
-    dimNode.click(function () {
+  if (!DIM.length) {
+    jQuery('body').append('<div id="DIM" style="display: none;" title="Dev info toolbar: Click to hide"></div>');
+    DIM = jQuery('#DIM');
+    DIM.click(function () {
       jQuery(this).hide(200).html('');
       return false;
     });
     // Show with a delay...
-    setTimeout(dimNode.show.bind(dimNode, 200), 1000);
+    setTimeout(DIM.show.bind(DIM, 200), 1000);
   }
   // Update content (unconditionally)...
-  dimNode.html(
-    jQuery(document).width() +
-      '<span>x</span>' +
-      jQuery(document).height() +
-      '<span>(</span>' +
-      jQuery(window).height() +
-      '<span>)</span>',
-  );
+  DIM.html(jQuery(document).width() + '<span>x</span>' + jQuery(document).height() + '<span>(</span>' + jQuery(window).height() + '<span>)</span>');
 }
-
 function DevelopmentWindowUpdate() {
   DIM();
 }
-
 jQuery(window).resize(function () {
   DevelopmentWindowUpdate();
 });
@@ -101,3 +85,4 @@ jQuery(document).ready(function () {
 });
 
 /* Development }}} */
+//# sourceMappingURL=scripts.js.map

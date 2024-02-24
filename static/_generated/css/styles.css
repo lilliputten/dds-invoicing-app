@@ -1,0 +1,87 @@
+/*{{{ Colors */
+/*}}}*/
+/*{{{ Mixins */
+/*}}}*/
+/*{{{ body */
+html,
+html a {
+  -webkit-font-smoothing: antialiased;
+}
+body {
+  background-color: #def;
+  padding-top: 100px;
+  transition: padding 0.25s;
+}
+@media (min-width: 992px) {
+  body {
+    padding-top: 140px;
+  }
+}
+body.main {
+  padding-top: 0px;
+}
+/*}}}*/
+label {
+  color: blue;
+}
+.TRACE {
+  border: 1px solid red;
+}
+.HIDDEN {
+  display: none;
+}
+#DIM {
+  overflow: hidden;
+  line-height: 150%;
+  z-index: 9500;
+  position: fixed;
+  bottom: 0;
+  left: 20px;
+  font-family: Lucida Console, monospace;
+  font-size: 8pt;
+  white-space: pre;
+  background: rgba(0, 0, 0, 0.8);
+  color: rgba(200, 200, 200, 0.8);
+  padding: 5px;
+  padding-right: 20px;
+  margin: 10px auto;
+  border-radius: 6px;
+}
+#DIM span {
+  color: #555555;
+}
+#DIM:before {
+  content: "-";
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.15);
+  padding-left: 8px;
+  padding-right: 8px;
+  margin-left: 20px;
+  margin-right: 20px;
+  border-radius: 4px;
+}
+@media (min-width: 480px) {
+  #DIM:before {
+    content: "xs 480px";
+  }
+}
+@media (min-width: 768px) {
+  #DIM:before {
+    content: "sm 768px";
+  }
+}
+@media (min-width: 992px) {
+  #DIM:before {
+    content: "md 992px";
+  }
+}
+@media (min-width: 1200px) {
+  #DIM:before {
+    content: "lg 1200px";
+  }
+}
+#less-error-message-static {
+  margin-top: 100px;
+}
+
+/*# sourceMappingURL=styles.css.map */

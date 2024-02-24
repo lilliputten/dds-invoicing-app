@@ -1,5 +1,5 @@
 {# ex: set ft=htmldjango : #}
-{% if settings.DEBUG %}
+{% if settings.DEV %}
 {% load livereload_tags %}
 {% endif %}
 
@@ -36,7 +36,7 @@
 {% if settings.DEV_MAKET_MODE %}
 <link href="/assets-src/_blocks_less.less" rel="stylesheet" type="text/less" />
 {% else %}
-<link href="/static/generated/css/styles.css" rel="stylesheet" type="text/css" />
+<link href="/static/_generated/css/styles.css" rel="stylesheet" type="text/css" />
 {% endif %}
 
 <!-- TODO: Common css resources -->
@@ -66,8 +66,6 @@
 
 {% include 'blocks/content/messages.django' %}
 
-<p>DEBUG: {{ settings.DEBUG }}</p>
-
 {% endblock body %}
 
 </div>
@@ -85,8 +83,11 @@
 
 {% compress js %}
 
-{% if settings.DEV_MAKET_MODE %}
+<script src="/static/js/scripts.js" type="text/javascript"></script>
+
+{% if settings.DEV %}
 <!-- Include dev scripts -->
+<script src="/assets-src/js-src/dev.js" type="text/javascript"></script>
 {% else %}
 <!-- Include built scripts -->
 {% endif %}
@@ -96,7 +97,6 @@
 {% endcompress js %}
 
 {% if settings.DEV_MAKET_MODE %}<!-- {{{ dev maket tools -->
-<script src="/assets-src/js-src/dev.js" type="text/javascript"></script>
 {# {{{ Dynamic less js support #}
 <script>
 less = {
@@ -124,7 +124,7 @@ less = {
 {# }}} Dynamic less js support #}
 <!-- dev maket tools }}} -->{% endif %}
 
-{% if settings.DEBUG %}
+{% if settings.DEV %}
 {% livereload_script %}
 {% endif %}
 

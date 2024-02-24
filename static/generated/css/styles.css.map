@@ -1,1 +1,0 @@
-{"version":3,"sources":["_blocks_less.css","blocks/debug/debug.less"],"names":[],"mappings":"AAAA,cAAc;AACd,MAAM;AACN,cAAc;AACd,MAAM;ACHN;EACE,WAAA;ADKF","file":"styles.css","sourcesContent":["/*{{{ Colors */\n/*}}}*/\n/*{{{ Mixins */\n/*}}}*/\nlabel {\n  color: blue;\n}\n","label {\n  color: blue;\n}\n"]}

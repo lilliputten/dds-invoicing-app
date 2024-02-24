@@ -1,17 +1,23 @@
 /*{{{ Colors */
 
+@primaryLightColor: #8a9;
+@primaryColor: #486;
+@primaryDarkColor: #375;
+@primaryDarkestColor: #3C5343;
+
+// UNUSED?
 @xdark-blue-color: #036;
 @dark-blue-color: #047;
 @medium-blue-color: #157;
-@mood-blue-color: #6AC;
-@extralight-blue-color: #DEF;
+@mood-blue-color: #6ac;
+@extralight-blue-color: #def;
 
 @dark-green-color: #461;
-@medium-green-color: #9A0;
+@medium-green-color: #9a0;
 
 @default-text-color: #333;
 
-@background-color: #FFF;
+@background-color: #fff;
 @background-color: @extralight-blue-color;
 // @background-color: darken(@extralight-blue-color,5%);
 // @background-color: lighten(@extralight-blue-color,5%);
@@ -43,11 +49,7 @@
   //@value: @arguments;
   //transition: @value;
 
-  -webkit-transition: @value;
-     -moz-transition: @value;
-      -ms-transition: @value;
-       -o-transition: @value;
-          transition: @value;
+  transition: @value;
 }
 
 .form-control-focus-b (@color: @input-form-glow-color) {
@@ -65,24 +67,16 @@
 }
 
 .content-column-rule(@column-rule) {
-  -webkit-column-rule: @column-rule;
-     -moz-column-rule: @column-rule;
-          column-rule: @column-rule;
+  column-rule: @column-rule;
 }
 .content-column-count(@column-count) {
-  -webkit-column-count: @column-count;
-     -moz-column-count: @column-count;
-          column-count: @column-count;
+  column-count: @column-count;
 }
 .content-column-gap(@column-gap) {
-  -webkit-column-gap: @column-gap;
-     -moz-column-gap: @column-gap;
-          column-gap: @column-gap;
+  column-gap: @column-gap;
 }
 .content-column-width(@column-width) {
-  -webkit-column-width: @column-width;
-     -moz-column-width: @column-width;
-          column-width: @column-width;
+  column-width: @column-width;
 }
 
 .stop-float () {

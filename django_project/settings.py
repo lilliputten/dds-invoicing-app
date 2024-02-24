@@ -20,8 +20,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Determine dev mode...
 
 RUNNING_DEVSERVER = (len(sys.argv) > 1 and sys.argv[1] == 'runserver')
-LOCAL = RUNNING_DEVSERVER
-DEBUG = LOCAL
+RUNNING_MANAGE_PY = (len(sys.argv) > 0 and sys.argv[0] == 'manage.py')
+RUNNING_MOD_WSGI = (len(sys.argv) > 0 and sys.argv[0] == 'mod_wsgi')
+LOCAL_RUN = RUNNING_MANAGE_PY and not RUNNING_MOD_WSGI
+LOCAL = LOCAL_RUN and RUNNING_DEVSERVER
+DEV = LOCAL
+DEBUG = True  # LOCAL
+
+print('RUNNING_DEVSERVER', RUNNING_DEVSERVER)
+print('RUNNING_MANAGE_PY', RUNNING_MANAGE_PY)
+print('RUNNING_MOD_WSGI', RUNNING_MOD_WSGI)
+print('LOCAL', LOCAL)
+print('DEV', DEV)
+
 DEV_MAKET_MODE = LOCAL and False  # Try to compile js & css resources on-the-fly, alternatively it's possible to use `livereload-server`
 BLOCKS_FILES_SCAN = DEV_MAKET_MODE
 SHOW_DJANGO_TOOLBAR = True
@@ -84,15 +95,13 @@ STATICFILES_FINDERS = (
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-j!v87tv!k=v7@79h&hydkr3og41uq@z=)euo@+)rbw0a*dpvx@'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
 ALLOWED_HOSTS = [
-    'localhost',
     'dds-invoicing-server.lilliputten.ru',
     'dds-invoicing-server.lilliputten.com',
+    # TODO: Add other actual domains
 ]
-
+if DEV:
+    ALLOWED_HOSTS.insert(0, 'localhost');
 
 # Application definition
 
@@ -112,7 +121,7 @@ INSTALLED_APPS = [
     # Local apps...
     'main.apps.MainConfig',
 ]
-if DEBUG:
+if LOCAL_RUN:
     INSTALLED_APPS.insert(0, 'livereload');
 
 MIDDLEWARE = [
@@ -124,14 +133,14 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-if DEBUG:
+if LOCAL_RUN:
     MIDDLEWARE.append('livereload.middleware.LiveReloadScript');
 
 ROOT_URLCONF = 'django_project.urls'
 
 # Extra templates folders...
 TEMPLATES_DIRS = []
-if DEBUG:
+if LOCAL_RUN:
     TEMPLATES_DIRS.append(ASSETS_ROOT);
 
 TEMPLATES = [
@@ -222,7 +231,15 @@ if LOCAL: SITE_NAME = 'LOCAL'
 
 # pass settings to context
 PASS_VARIABLES = {
+    # DEBUG: Debug only!
+    'RUNNING_DEVSERVER': RUNNING_DEVSERVER,
+    'RUNNING_MOD_WSGI': RUNNING_MOD_WSGI,
+    'RUNNING_MANAGE_PY': RUNNING_MANAGE_PY,
+    'ARGV': sys.argv,
+
     'DEBUG': DEBUG,
+    'DEV': DEV,
+    'LOCAL_RUN': LOCAL_RUN,
     'LOCAL': LOCAL,
     'DEV_MAKET_MODE': DEV_MAKET_MODE,
     'COMPRESS_ENABLED': COMPRESS_ENABLED,

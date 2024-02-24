@@ -63,39 +63,10 @@ overrides:
       sourceType: 'module'
 
   - # Raw js project files...
-    files: 'static/**/*.js'
-    # parser: '@babel/eslint-parser'
-    parser: null
-    env:
-      es6: true
-      browser: true
-      # jest: true
-      # jest/globals: true
+    files: 'assets-src/**/*.js'
     globals:
-      modules: true
       DebugObjS: true
       LOG: true
-    extends:
-      - 'eslint:recommended'
-      - 'plugin:prettier/recommended'
-    plugins:
-      - 'prettier' # prettier: Slighly slower (+~0.3s)
-    rules:
-      no-var: 'warn'
-      prettier/prettier: 'warn'
-      no-unused-vars:
-        - 'warn'
-        - argsIgnorePattern: '^_'
-      no-console: 'warn'
-      no-debugger: 'warn'
-      no-extra-semi: 'warn'
-      no-redeclare: 'warn'
-      no-undef: 'error'
-      no-unreachable: 'warn'
-      prefer-const: 'warn'
-      semi:
-        - 'warn'
-        - 'always'
 
   # TODO: ts, tsx files settings for upcoming react project
 
