@@ -217,6 +217,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Site config
 
 SITE_NAME = u'DDS Invoicing'
+SITE_TITLE = SITE_NAME
 SITE_DESCRIPTION = u'DDS Invoicing'
 SITE_KEYWORDS = u'''
 DDS
@@ -226,7 +227,7 @@ application
 SITE_KEYWORDS = re.sub(r'\s*[\n\r]+\s*', ', ', SITE_KEYWORDS.strip())
 #  print(u'keywords: %s ' % SITE_KEYWORDS)
 
-if LOCAL: SITE_NAME = 'LOCAL'
+if DEV: SITE_TITLE += ' (DEV)'
 
 
 # pass settings to context
@@ -244,6 +245,7 @@ PASS_VARIABLES = {
     'DEV_MAKET_MODE': DEV_MAKET_MODE,
     'COMPRESS_ENABLED': COMPRESS_ENABLED,
     'SITE_NAME': SITE_NAME,
+    'SITE_TITLE': SITE_TITLE,
     'BEAUTIFY_HTML': BEAUTIFY_HTML,
     'BEAUTIFY_HTML_OPTIONS': BEAUTIFY_HTML_OPTIONS,
     'BLOCKS_FOLDER': BLOCKS_FOLDER,
