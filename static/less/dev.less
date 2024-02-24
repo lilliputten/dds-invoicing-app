@@ -1,0 +1,53 @@
+@import "bootstrap/variables.less";
+@import "bootstrap/mixins.less";
+
+.TRACE {
+	border: 1px solid red;
+}
+
+.HIDDEN {
+	display: none;
+}
+
+#DIM {
+	overflow: hidden;
+	line-height: 150%;
+	z-index: 9500;
+	/*width: 100%;*/
+	position: fixed;
+	// top: 50%;
+	// top: 0;
+	bottom: 0;
+	left: 20px;
+	font-family: Lucida Console, monospace;
+	font-size: 8pt;
+	white-space: pre;
+	background: rgba(0,0,0,.8);
+	color: rgba(200,200,200,.8);
+	padding: 5px;
+	padding-right: 20px;
+	margin: 10px auto;
+	border-radius: 6px;
+	span {
+		color: #555555;
+	}
+	&:before {
+		content: "-";
+		@media (min-width: @screen-xs-min ) { content: "xs @{screen-xs-min}"; }
+		@media (min-width: @screen-sm-min ) { content: "sm @{screen-sm-min}"; }
+		@media (min-width: @screen-md-min ) { content: "md @{screen-md-min}"; }
+		@media (min-width: @screen-lg-min ) { content: "lg @{screen-lg-min}"; }
+		//@media (min-width: @screen-xl-min ) { content: "xl @{screen-xl-min}"; }
+		display: inline-block;
+		background-color: rgba(255,255,255,.15);
+		padding-left: 8px;
+		padding-right: 8px;
+		margin-left: 20px;
+		margin-right: 20px;
+		border-radius: 4px;
+	}
+}
+
+#less-error-message-static {
+	margin-top: 100px;
+}

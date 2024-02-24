@@ -1,0 +1,12 @@
+{# ex: set ft=htmldjango : #}
+{% extends "!base_layout.html.django" %}
+
+{% block body_class %}main{% endblock %}
+
+{% block page_header %}
+{{ block.super }}
+{% endblock page_header %}
+
+{% block body %}
+{{ block.super }}
+{% endblock body %}
