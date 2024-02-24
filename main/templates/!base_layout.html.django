@@ -35,7 +35,7 @@
 {% if settings.DEV_MAKET_MODE %}
 <link href="/assets-src/_blocks_less.less" rel="stylesheet" type="text/less" />
 {% else %}
-<link href="/static/generated/css/_blocks_less.css" rel="stylesheet" type="text/css" />
+<link href="/static/generated/css/styles.css" rel="stylesheet" type="text/css" />
 {% endif %}
 
 <!-- TODO: Common css resources -->

@@ -20,10 +20,7 @@ const now = new Date();
 // NOTE: Date formats for 'dayjs', @see https://day.js.org/docs/en/display/format
 const tagFormat = 'YYMMDD-HHmm';
 const timeFormat = 'YYYY.MM.DD HH:mm ZZ';
-/** // NOTE: Date formats for `date-fns*` library...
- * const tagFormat = 'yyMMdd-HHmm';
- * const timeFormat = 'yyyy.MM.dd, HH:mm zzz';
- */
+const timeTagFormat = 'YYYY.MM.DD HH:mm:ss ZZ';
 
 const currPath = path.resolve(__dirname);
 const prjPath = path.resolve(path.dirname(path.basename(currPath)));
@@ -36,7 +33,7 @@ const envData = readProjectEnv();
 
 const timeZone = config.timeZone || '';
 
-// // UNUSED: These parameters was retrieved from `package.json` (prjConfig) but sometimes this file is updated after the generation of those variables
+// NOTE: These parameters can be retrieved from `package.json` (prjConfig) but sometimes this file is updated after the generation of those variables
 const timestampFileName = path.resolve(prjPath, 'build-timestamp.txt');
 const timetagFileName = path.resolve(prjPath, 'build-timetag.txt');
 const versionFileName = path.resolve(prjPath, 'build-version.txt');
@@ -138,7 +135,7 @@ function getAllData() {
 }
 
 function formatDate(date, timeZone, fmt) {
-  let dayjsDate = dayjs(date);
+  let dayjsDate = dayjs(date || new Date());
   if (timeZone) {
     dayjsDate = dayjsDate.tz(timeZone);
   }
@@ -213,6 +210,10 @@ function getEnvVariable(key) {
 }
 
 module.exports = {
+  tagFormat,
+  timeFormat,
+  timeTagFormat,
+  timeZone,
   prjPath,
   getBuildInfo,
   getBuildInfoText,
@@ -221,4 +222,5 @@ module.exports = {
   truthyValue,
   getEnvVariable,
   // readProjectEnv,
+  formatDate,
 };

@@ -1,6 +1,6 @@
 // --@ts-check
 
-// import fs from 'fs';
+import fs from 'fs';
 import path from 'path';
 
 import gulp from 'gulp';
@@ -13,90 +13,108 @@ import sourcemaps from 'gulp-sourcemaps';
 import gulpLess from 'gulp-less';
 import gulpAutoprefixer from 'gulp-autoprefixer';
 
-import browserSyncModule from 'browser-sync';
-const browserSync = browserSyncModule.create();
-const reload = browserSync.reload;
-
-/* // UNUSED: Attempt to use hot-reload deature
- * // @see: https://jsramblings.com/hot-reloading-gulp-webpack-browsersync/
- * import webpack from 'webpack';
- * import webpackDevMiddleware from 'webpack-dev-middleware';
- * import webpackHotMiddleware from 'webpack-hot-middleware';
- * import browserSyncModule from 'browser-sync';
- * import webpackConfig from './webpack.config.js';
- * const browserSync = browserSyncModule.create();
- * const reload = browserSync.reload;
- * const bundler = webpack(webpackConfig);
- * // @see: https://browsersync.io/docs/options
- * browserSync.init({
- *   server: {
- *     baseDir: './',
- *     middleware: [
- *       webpackDevMiddleware(bundler, {
- *         publicPath: webpackConfig.output.publicPath,
- *         stats: { colors: true },
- *       }),
- *       webpackHotMiddleware(bundler),
- *     ],
- *   },
- * });
- */
+import {
+  // getBuildInfoText,
+  prjPath,
+  formatDate,
+  timeTagFormat,
+  timeZone,
+} from './utils/gulp-helpers.js';
 
 /* // UNUSED: For relative paths processing...
  * import replace from 'gulp-replace';
  * import tap from 'gulp-tap';
  */
 
-// const buildPath = 'build/';
+const staticPath = 'static/';
 
-import {
-  // getBuildInfoText,
-  prjPath,
-} from './utils/gulp-helpers.js';
+const watchOptions = {
+  // @see: https://gulpjs.com/docs/en/getting-started/watching-files/
+  events: 'all',
+  /** Omit initial action for watch cycles */
+  ignoreInitial: true,
+  delay: 1000,
+  // NOTE: There is a bug with styles compiling watching by `livereload-server`: it takes only previous state, needs to make one extra update
+};
 
-const stylesSrcAll = 'assets-src/blocks/**/*.less';
-const stylesSrcAssets = 'assets-src/_blocks_less.less';
-const stylesDest = 'static/generated/css';
+const stylesSrcAll = ['assets-src/blocks/**/*.less'];
+const stylesSrcEntry = 'assets-src/_blocks_less.less';
+const stylesDest = staticPath + 'generated/css/';
 const lessConfig = {
-  paths: [path.join(prjPath, 'static')],
+  paths: [path.join(prjPath, staticPath)],
   sourceMaps: true,
 };
+
+/** Use a delay to confirm update of styles for `livereload-server`.
+ * Use only if watch task has run.
+ */
+const finishGenerationDelay = 2000;
+
+let isWatchTask = false;
+let finishedStylesHandler = undefined;
+
+function finishedStyles() {
+  return new Promise((resolve) => {
+    if (finishedStylesHandler) {
+      clearTimeout(finishedStylesHandler);
+    }
+    finishedStylesHandler = setTimeout(
+      () => {
+        finishedStylesHandler = null;
+        const dateStr = formatDate(null, timeZone, timeTagFormat);
+        // eslint-disable-next-line no-console
+        console.log('finishedStyles:', dateStr);
+        fs.writeFile(stylesDest + 'generated.txt', dateStr, resolve);
+      },
+      // NOTE: Use delay only for watched tasks
+      isWatchTask ? finishGenerationDelay : 0,
+    );
+  });
+}
+
 function compileStyles() {
-  return gulp
-    .src(stylesSrcAssets)
-    .pipe(sourcemaps.init())
-    .pipe(gulpLess(lessConfig))
-    .pipe(gulpAutoprefixer())
-    .pipe(gulpConcat('styles.css'))
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(stylesDest));
+  return (
+    gulp
+      .src(stylesSrcEntry)
+      .pipe(sourcemaps.init())
+      .pipe(gulpLess(lessConfig))
+      .pipe(gulpAutoprefixer())
+      .pipe(gulpConcat('styles.css'))
+      .pipe(sourcemaps.write('.'))
+      .pipe(gulp.dest(stylesDest))
+      // xxx
+      .on('end', finishedStyles)
+  );
 }
 gulp.task('compileStyles', compileStyles);
-gulp.task('watchCompileStyles', () => {
-  // browserSync.init({
-  //   server: {
-  //     baseDir: './',
-  //   },
-  // });
-  // @see: https://gulpjs.com/docs/en/getting-started/watching-files/
-  gulp
-    .watch(
-      [stylesSrcAll],
-      {
-        // @see: https://gulpjs.com/docs/en/getting-started/watching-files/
-        events: 'all',
-        ignoreInitial: true,
-      },
-      compileStyles,
-    )
-    .on('change', reload);
+gulp.task('compileStylesWatch', () => {
+  isWatchTask = true;
+  return gulp.watch(stylesSrcAll, watchOptions, compileStyles);
 });
 
-/* // UNUSED: patchBuildTasks
- * const patchBuildTasks = [
- *   'writeBuildInfo',
- *   'prettifyHtml',
- *   'copyExtraFiles',
- * ].filter(Boolean);
- * gulp.task('patchBuild', gulp.parallel.apply(gulp, patchBuildTasks));
- */
+const assetsSrc = [
+  // Templates...
+  'assets-src/**/*.django',
+];
+function copyAssetsToStatic() {
+  return gulp.src(assetsSrc, { base: './assets-src' }).pipe(gulp.dest(staticPath));
+}
+gulp.task('copyAssetsToStatic', copyAssetsToStatic);
+gulp.task('copyAssetsToStaticWatch', () => {
+  isWatchTask = true;
+  return gulp.watch(assetsSrc, watchOptions, copyAssetsToStatic);
+});
+
+const updateAllTasks = [
+  // Watch all tasks...
+  'compileStyles',
+  'copyAssetsToStatic',
+].filter(Boolean);
+gulp.task('updateAll', gulp.parallel.apply(gulp, updateAllTasks));
+
+const watchAllTasks = [
+  // Watch all tasks...
+  'compileStylesWatch',
+  'copyAssetsToStaticWatch',
+].filter(Boolean);
+gulp.task('watchAll', gulp.parallel.apply(gulp, watchAllTasks));

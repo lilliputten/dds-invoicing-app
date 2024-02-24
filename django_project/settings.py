@@ -129,6 +129,11 @@ if DEBUG:
 
 ROOT_URLCONF = 'django_project.urls'
 
+# Extra templates folders...
+TEMPLATES_DIRS = []
+if DEBUG:
+    TEMPLATES_DIRS.append(ASSETS_ROOT);
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -143,6 +148,7 @@ TEMPLATES = [
                 APP_NAME+'.context_processors.common_values',  # Pass local context to the templates. @see `main/context_processors.py`
             ],
         },
+        'DIRS': TEMPLATES_DIRS,
     },
 ]
 

@@ -5,7 +5,7 @@
 
 {% block body %}
 
-Test 2
+{% include 'blocks/debug/debug.django' %}
 
 <form action="{% url 'application:detail' application.id %}" method="post">
 {% csrf_token %}
