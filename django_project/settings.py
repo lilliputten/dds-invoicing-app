@@ -96,8 +96,8 @@ STATICFILES_FINDERS = (
 SECRET_KEY = 'django-insecure-j!v87tv!k=v7@79h&hydkr3og41uq@z=)euo@+)rbw0a*dpvx@'
 
 ALLOWED_HOSTS = [
-    #  'dds-invoicing-server.lilliputten.ru',
-    #  'dds-invoicing-server.lilliputten.com',
+    'dds-invoicing-server.lilliputten.ru',
+    'dds-invoicing-server.lilliputten.com',
     #  # TODO: Add other actual domains
 ]
 if DEV:
@@ -121,7 +121,7 @@ INSTALLED_APPS = [
     # Local apps...
     'main.apps.MainConfig',
 ]
-if LOCAL_RUN:
+if DEV:
     INSTALLED_APPS.insert(0, 'livereload');
 
 MIDDLEWARE = [
@@ -133,14 +133,14 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-if LOCAL_RUN:
+if DEV:
     MIDDLEWARE.append('livereload.middleware.LiveReloadScript');
 
 ROOT_URLCONF = 'django_project.urls'
 
 # Extra templates folders...
 TEMPLATES_DIRS = []
-if LOCAL_RUN:
+if DEV:
     TEMPLATES_DIRS.append(ASSETS_ROOT);
 
 TEMPLATES = [

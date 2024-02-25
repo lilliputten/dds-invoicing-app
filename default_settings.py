@@ -1,7 +1,7 @@
 from django_project.settings import *
 
 ALLOWED_HOSTS = [
-    'localhost',
+    #  'localhost',
     'dds-invoicing-server.lilliputten.ru',
     'dds-invoicing-server.lilliputten.com',
 ]
