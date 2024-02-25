@@ -33,7 +33,7 @@ print('RUNNING_MOD_WSGI', RUNNING_MOD_WSGI)
 print('LOCAL', LOCAL)
 print('DEV', DEV)
 
-DEV_MAKET_MODE = LOCAL and False  # Try to compile js & css resources on-the-fly, alternatively it's possible to use `livereload-assets-server`
+DEV_MAKET_MODE = LOCAL and False  # Try to compile js & css resources on-the-fly, alternatively it's possible to use `livereload-assets-server` (see below)
 BLOCKS_FILES_SCAN = DEV_MAKET_MODE
 SHOW_DJANGO_TOOLBAR = True
 COMPRESS_ENABLED = not LOCAL # not DEV_MAKET_MODE
@@ -121,8 +121,6 @@ INSTALLED_APPS = [
     # Local apps...
     'main.apps.MainConfig',
 ]
-if True or DEV:
-    INSTALLED_APPS.insert(0, 'livereload');
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -133,7 +131,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-if True or DEV:
+
+# Add livereload app...
+INSTALLED_APPS.insert(0, 'livereload');
+if False or DEV:
     MIDDLEWARE.append('livereload.middleware.LiveReloadScript');
 
 ROOT_URLCONF = 'django_project.urls'
