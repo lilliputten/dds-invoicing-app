@@ -121,7 +121,7 @@ INSTALLED_APPS = [
     # Local apps...
     'main.apps.MainConfig',
 ]
-if DEV:
+if True or DEV:
     INSTALLED_APPS.insert(0, 'livereload');
 
 MIDDLEWARE = [
@@ -133,13 +133,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-if DEV:
+if True or DEV:
     MIDDLEWARE.append('livereload.middleware.LiveReloadScript');
 
 ROOT_URLCONF = 'django_project.urls'
 
 # Extra templates folders...
-TEMPLATES_DIRS = []
+TEMPLATES_DIRS = [STATIC_ROOT]
 if DEV:
     TEMPLATES_DIRS.append(ASSETS_ROOT);
 
