@@ -96,9 +96,9 @@ STATICFILES_FINDERS = (
 SECRET_KEY = 'django-insecure-j!v87tv!k=v7@79h&hydkr3og41uq@z=)euo@+)rbw0a*dpvx@'
 
 ALLOWED_HOSTS = [
-    'dds-invoicing-server.lilliputten.ru',
-    'dds-invoicing-server.lilliputten.com',
-    # TODO: Add other actual domains
+    #  'dds-invoicing-server.lilliputten.ru',
+    #  'dds-invoicing-server.lilliputten.com',
+    #  # TODO: Add other actual domains
 ]
 if DEV:
     ALLOWED_HOSTS.insert(0, 'localhost');
