@@ -1,7 +1,7 @@
 {# ex: set ft=htmldjango : #}
 {% extends "!base-main.html.django" %}
 
-{% block title %}Bootstrap components demo {{ block.super }}{% endblock %}
+{% block title %}Bootstrap components demo &mdash; {{ block.super }}{% endblock %}
 
 {% block page_body %}
 {{ block.super }}
