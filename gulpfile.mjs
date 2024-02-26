@@ -33,9 +33,9 @@ import {
 const forceSecondReloadOnWatch = true;
 
 const staticPath = 'static/';
-const generatedPath = staticPath + '_generated/';
+const generatedPath = staticPath + 'generated-assets/';
 
-const assetsSrcPath = 'assets-src/';
+const assetsSrcPath = 'src/';
 
 const watchOptions = {
   // @see: https://gulpjs.com/docs/en/getting-started/watching-files/
@@ -154,7 +154,7 @@ const assetsSrc = [
   assetsSrcPath + '**/*.django',
 ];
 function copyAssets() {
-  return gulp.src(assetsSrc, { base: './assets-src' }).pipe(gulp.dest(staticPath));
+  return gulp.src(assetsSrc, { base: assetsSrcPath }).pipe(gulp.dest(staticPath));
 }
 gulp.task('copyAssets', copyAssets);
 gulp.task('copyAssetsWatch', () => {

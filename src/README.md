@@ -2,7 +2,7 @@
 
 Assets sources located in `assets-src` folder.
 
-Scripts and styles are compiled to `static/_generated/{js,css}` folders.
+Scripts and styles are compiled to `static/generated-assets/{js,css}` folders.
 
 Template blocks are copied to `static/blocks` folder.
 

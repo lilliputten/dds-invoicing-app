@@ -58,7 +58,7 @@ STATIC_FOLDER = posixpath.join('static', '')
 STATIC_ROOT = posixpath.join(BASE_DIR, STATIC_FOLDER, '')
 STATIC_URL = posixpath.join('/', STATIC_FOLDER, '')
 
-ASSETS_FOLDER = posixpath.join('assets-src', '')
+ASSETS_FOLDER = posixpath.join('src', '')
 ASSETS_ROOT = posixpath.join(BASE_DIR, ASSETS_FOLDER, '')
 ASSETS_URL = posixpath.join('/', ASSETS_FOLDER, '')
 
@@ -253,6 +253,7 @@ PASS_VARIABLES = {
     'STATIC_ROOT': STATIC_ROOT,
     'BLOCKS_ROOT': BLOCKS_ROOT,
     'STATIC_URL': STATIC_URL,
+    'ASSETS_URL': ASSETS_URL,
     'SITE_DESCRIPTION': SITE_DESCRIPTION,
     'SITE_KEYWORDS': SITE_KEYWORDS,
     #  'ITEM_PER_USER_LIMIT': 20,
