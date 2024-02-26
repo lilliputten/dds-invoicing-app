@@ -9,11 +9,14 @@ html {
   // font-smooth: always;
 }
 
-html, html a {
+html,
+html a {
   // -webkit-font-smoothing: antialiased;
 }
 
 body {
   font-family: @defaultFontFamily;
   background-color: @backgroundColor;
+  // Add space for fixed navar (see `src/blocks/navbar/navbar.django`)
+  padding-top: 70px;
 }

@@ -3,7 +3,7 @@
 
 {% block body_class %}default{% endblock %}
 
-{% block title %}Application {{ application.id }} {{ block.super }}{% endblock %}
+{% block title %}Application &mdash;{{ application.id }} {{ block.super }}{% endblock %}
 
 {% block page_body %}
 {{ block.super }}
