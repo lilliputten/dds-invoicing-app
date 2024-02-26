@@ -1,0 +1,6 @@
+{% comment %}
+<!-- ex: set ft=htmldjango : -->
+{% endcomment %}
+<debug>
+  DEBUG 5
+</debug>

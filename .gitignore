@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+/.venv
 
 # testing
 /coverage
@@ -20,6 +21,9 @@
 .env.test.local
 .env.production.local
 
+# Local data
+/*.sqlite3
+
 # Logs
 logs
 *.log
@@ -29,7 +33,9 @@ yarn-error.log*
 lerna-debug.log*
 
 # Local files
-utils/config-local.sh
+/utils/config-local.sh
+/static/CACHE
+/static/_generated/.generated.txt
 
 # Temporariy, swap, log & ignored files
 tsconfig.tsbuildinfo

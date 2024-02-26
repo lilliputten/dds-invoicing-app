@@ -1,0 +1,19 @@
+{# ex: set ft=htmldjango : #}
+{% extends "!base-main.html.django" %}
+
+{% block title %}Test index {{ block.super }}{% endblock %}
+
+{% block body %}
+{{ block.super }}
+
+{% if latest_application_list %}
+    <ul>
+    {% for application in latest_application_list %}
+        <li><a href="{% url 'application:detail' application.id %}">{{ application.id }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No applications are available.</p>
+{% endif %}
+
+{% endblock body %}

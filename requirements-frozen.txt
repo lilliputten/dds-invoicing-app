@@ -1,0 +1,17 @@
+asgiref==3.7.2
+autopep8==2.0.4
+Django==4.2.10
+django-appconf==1.0.6
+django-compressor==4.4
+django-livereload-server==0.5.1
+nodeenv==1.8.0
+numpy==1.26.4
+pyarrow==15.0.0
+pycodestyle==2.11.1
+pyright==1.1.351
+rcssmin==1.1.1
+rjsmin==1.2.1
+setuptools==69.1.0
+sqlparse==0.4.4
+tornado==6.4
+tzdata==2024.1

@@ -1,0 +1,22 @@
+{# ex: set ft=htmldjango : #}
+{% extends "!base-core.html.django" %}
+
+{% block page_header %}
+{{ block.super }}
+
+{% if settings.DEBUG and False %}
+<p>ARGV: {{ settings.ARGV }}</p>
+<p>DEV: {{ settings.DEV }}</p>
+<p>DEBUG: {{ settings.DEBUG }}</p>
+<p>RUNNING_DEVSERVER: {{ settings.RUNNING_DEVSERVER }}</p>
+<p>RUNNING_MOD_WSGI: {{ settings.RUNNING_MOD_WSGI }}</p>
+<p>RUNNING_MANAGE_PY: {{ settings.RUNNING_MANAGE_PY }}</p>
+{% endif %}
+
+{% include 'blocks/navbar/navbar.django' %}
+{% endblock page_header %}
+
+{% block body %}
+{{ block.super }}
+{% endblock body %}
+
