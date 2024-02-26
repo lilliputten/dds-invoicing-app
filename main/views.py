@@ -32,6 +32,10 @@ class DetailView(generic.DetailView):
     template_name = "detail.html"
 
 
+def components_demo(request: HttpRequest):
+    return render(request, "components-demo.django")
+
+
 def detail(request: HttpRequest, application_id: str):
     #  return HttpResponse("You're looking at application %s." % application_id)  # pyright: ignore [reportArgumentType]
     #  try:
