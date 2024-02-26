@@ -3,7 +3,7 @@
 
 {% block title %}Test index {{ block.super }}{% endblock %}
 
-{% block body %}
+{% block page_body %}
 {{ block.super }}
 
 {% if latest_application_list %}
@@ -16,4 +16,4 @@
     <p>No applications are available.</p>
 {% endif %}
 
-{% endblock body %}
+{% endblock page_body %}

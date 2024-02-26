@@ -5,7 +5,7 @@
 
 {% block title %}Application {{ application.id }} {{ block.super }}{% endblock %}
 
-{% block body %}
+{% block page_body %}
 {{ block.super }}
 
 {% comment %} {% include 'blocks/debug/debug.django' %} {% endcomment %}
@@ -20,4 +20,4 @@
 <input type="submit" value="Save">
 </form>
 
-{% endblock body %}
+{% endblock page_body %}
