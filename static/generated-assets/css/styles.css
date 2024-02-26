@@ -4,7 +4,7 @@
 body {
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   background-color: #fff;
-  padding-top: 70px;
+  margin-top: 70px;
 }
 /**
  * @module debug
@@ -146,12 +146,13 @@ a.thumbnail.active,
 .panel-primary > .panel-heading {
   border-color: #486;
 }
+a,
+.text-primary,
 .pagination > li > a,
 .pagination > li > span,
 .list-group-item.active > .badge,
 .nav-pills > .active > a > .badge,
 .panel-primary > .panel-heading .badge,
-.text-primary,
 .btn-primary .badge,
 .pagination > li > span:focus,
 .btn-link {

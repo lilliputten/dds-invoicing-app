@@ -111,7 +111,7 @@
   {% compress js %}
 
   <!-- TODO: Move this script to dev-only section -->
-  <script src="{{ settings.STATIC_URL }}vendor/js/holder.js" type="text/javascript"></script>
+  <script src="{{ settings.STATIC_URL }}vendor/js/holder-2.3.2/holder.js" type="text/javascript"></script>
 
   <script src="{{ settings.STATIC_URL }}generated-assets/js/scripts.js" type="text/javascript"></script>
 
