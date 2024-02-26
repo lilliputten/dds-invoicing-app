@@ -1,4 +1,4 @@
-# Additional requirements for dev-environment; see also `.flaskenv*` files.
+# Additional requirements for dev-environment
 # @changed 2024.02.21, 17:44
 # vim: ft=conf
 
