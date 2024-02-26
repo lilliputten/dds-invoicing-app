@@ -104,5 +104,67 @@ label {
   background-color: rgba(68, 136, 102, 0.5);
   border-color: rgba(68, 136, 102, 0.25);
 }
+.panel-primary > .panel-heading,
+.list-group-item.active,
+.list-group-item.active:hover,
+.list-group-item.active:focus,
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus,
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus,
+.progress-bar,
+.bg-primary,
+fieldset[disabled] .btn-primary.focus,
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus,
+.label-primary {
+  background-color: #486;
+}
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus,
+a.thumbnail:hover,
+a.thumbnail:focus,
+a.thumbnail.active,
+.list-group-item.active,
+.list-group-item.active:hover,
+.list-group-item.active:focus,
+.nav .open > a,
+.nav .open > a:hover,
+.nav .open > a:focus,
+.panel-primary,
+.panel-primary > .panel-heading {
+  border-color: #486;
+}
+.pagination > li > a,
+.pagination > li > span,
+.list-group-item.active > .badge,
+.nav-pills > .active > a > .badge,
+.panel-primary > .panel-heading .badge,
+.text-primary,
+.btn-primary .badge,
+.pagination > li > span:focus,
+.btn-link {
+  color: #486;
+}
+a:hover,
+a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus,
+.btn-link:hover,
+.btn-link:focus {
+  color: #375;
+}
 
 /*# sourceMappingURL=styles.css.map */

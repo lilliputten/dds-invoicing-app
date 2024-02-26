@@ -17,7 +17,7 @@ TODO: Add the project description.
 - [CHANGELOG](CHANGELOG.md)
 - [TODO](TODO.md)
 
-- [Sources workflow](assets-src/README.md)
+- [Sources workflow](src/README.md)
 
 ## Project resources
 

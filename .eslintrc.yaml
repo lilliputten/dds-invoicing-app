@@ -63,7 +63,7 @@ overrides:
       sourceType: 'module'
 
   - # Raw js project files...
-    files: 'assets-src/**/*.js'
+    files: 'src/**/*.js'
     globals:
       DEV: true
       DEBUG: true
