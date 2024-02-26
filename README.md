@@ -17,6 +17,8 @@ TODO: Add the project description.
 - [CHANGELOG](CHANGELOG.md)
 - [TODO](TODO.md)
 
+- [Sources workflow](assets-src/README.md)
+
 ## Project resources
 
 Repository: https://github.com/lilliputten/dds-invoicing-app
