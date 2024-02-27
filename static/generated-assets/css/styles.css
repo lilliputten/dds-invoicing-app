@@ -1,0 +1,392 @@
+/**
+ * @module body
+ */
+body {
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  background-color: #fff;
+  margin-top: 70px;
+}
+/**
+ * @module debug
+ */
+label {
+  color: blue;
+}
+/**
+ * @module dev
+ */
+.TRACE {
+  border: 1px solid red;
+}
+.HIDDEN {
+  display: none;
+}
+#DIM {
+  overflow: hidden;
+  line-height: 150%;
+  z-index: 9500;
+  position: fixed;
+  bottom: 0;
+  left: 20px;
+  font-family: Lucida Console, monospace;
+  font-size: 8pt;
+  white-space: pre;
+  background: rgba(0, 0, 0, 0.8);
+  color: rgba(200, 200, 200, 0.8);
+  padding: 5px;
+  padding-right: 20px;
+  margin: 10px auto;
+  border-radius: 6px;
+}
+#DIM span {
+  color: #555555;
+}
+#DIM:before {
+  content: "-";
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.15);
+  padding-left: 8px;
+  padding-right: 8px;
+  margin-left: 20px;
+  margin-right: 20px;
+  border-radius: 4px;
+}
+@media (min-width: 480px) {
+  #DIM:before {
+    content: "xs 480px";
+  }
+}
+@media (min-width: 768px) {
+  #DIM:before {
+    content: "sm 768px";
+  }
+}
+@media (min-width: 992px) {
+  #DIM:before {
+    content: "md 992px";
+  }
+}
+@media (min-width: 1200px) {
+  #DIM:before {
+    content: "lg 1200px";
+  }
+}
+#less-error-message-static {
+  margin-top: 100px;
+}
+/**
+ * @module main-page-splash
+ */
+.main-page-splash {
+  background-color: #486;
+  color: #fff;
+  position: relative;
+}
+.main-page-splash:before {
+  display: block;
+  content: ' ';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  opacity: 0.15;
+  background-image: url('/static/images/splash/curves-bg/curves-x.svg');
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.main-page-splash > .content {
+  position: relative;
+}
+.main-page-splash > .content h1 {
+  font-weight: 400;
+}
+/**
+ * @module page-footer-navbar
+ */
+.page-footer-navbar {
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 0;
+}
+.page-footer-navbar .container-fluid {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+}
+.page-footer-navbar .container-fluid .navbar-right {
+  display: flex;
+  flex-wrap: wrap;
+}
+@media (min-width: 768px) {
+  .page-footer-navbar .container-fluid {
+    flex-direction: row;
+  }
+  .page-footer-navbar .container-fluid .navbar-copyright,
+  .page-footer-navbar .container-fluid .navbar-middle,
+  .page-footer-navbar .container-fluid .navbar-right {
+    flex: 1;
+  }
+  .page-footer-navbar .container-fluid .navbar-right {
+    justify-content: flex-end;
+  }
+}
+.page-footer-navbar .navbar-copyright {
+  display: flex;
+  align-items: center;
+}
+/**
+ * @module page-header-navbar
+ * @changed 2024.02.27, 22:10
+ */
+.page-header-navbar.navbar-inverse.navbar-primary {
+  background-color: #486;
+  color: #fff;
+}
+.page-header-navbar.navbar-inverse.navbar-primary:before {
+  display: block;
+  content: ' ';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  opacity: 0.15;
+  background-image: url('/static/images/splash/curves-bg/curves-x.svg');
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.page-header-navbar .navbar-header {
+  position: relative;
+}
+/**
+ * @module bootstrap-theme
+ * @see static/vendor/bootstrap-3.4.1/css/bootstrap.css
+ */
+.panel-primary > .panel-heading,
+.list-group-item.active,
+.list-group-item.active:hover,
+.list-group-item.active:focus,
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus,
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus,
+.progress-bar:not(.progress-bar-success):not(.progress-bar-info):not(.progress-bar-warning):not(.progress-bar-danger),
+.bg-primary,
+fieldset[disabled] .btn-primary.focus,
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus,
+.label-primary {
+  background-color: #486;
+}
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus,
+a.thumbnail:hover,
+a.thumbnail:focus,
+a.thumbnail.active,
+.list-group-item.active,
+.list-group-item.active:hover,
+.list-group-item.active:focus,
+.nav .open > a,
+.nav .open > a:hover,
+.nav .open > a:focus,
+.panel-primary,
+.panel-primary > .panel-heading {
+  border-color: #486;
+}
+a,
+.text-primary,
+.pagination > li > a,
+.pagination > li > span,
+.list-group-item.active > .badge,
+.nav-pills > .active > a > .badge,
+.panel-primary > .panel-heading .badge,
+.btn-primary .badge,
+.pagination > li > span:focus,
+.btn-link {
+  color: #486;
+}
+a:hover,
+a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus,
+.btn-link:hover,
+.btn-link:focus {
+  color: #375;
+}
+/**
+ * @module btn-primary-theme
+ */
+.btn-default,
+.btn-primary,
+.btn-success,
+.btn-info,
+.btn-warning,
+.btn-danger {
+  transition: all 250ms;
+}
+.btn-primary {
+  background-color: #486;
+  border-color: #3c7759;
+}
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #3c7759;
+  border-color: #33664d;
+}
+.btn-primary:active,
+.btn-primary.active {
+  background-color: #33664d;
+  border-color: #2b5540;
+}
+.btn-primary.disabled,
+.btn-primary:disabled,
+.btn-primary[disabled] {
+  background-color: rgba(68, 136, 102, 0.5);
+  border-color: rgba(68, 136, 102, 0.25);
+}
+/**
+ * @module navbar-fixups
+ */
+.navbar .navbar-brand {
+  padding-top: 0;
+  padding-bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+/**
+ * @module navbar-primary-theme
+ * @desc Inverse primary navbar
+ */
+.navbar-inverse.navbar-primary {
+  background-color: #486;
+  border-color: #375;
+}
+.navbar-inverse.navbar-primary .navbar-brand {
+  color: #fff;
+}
+.navbar-inverse.navbar-primary .navbar-brand:hover,
+.navbar-inverse.navbar-primary .navbar-brand:focus {
+  color: #fff;
+  background-color: transparent;
+}
+.navbar-inverse.navbar-primary .navbar-text {
+  color: #fff;
+}
+.navbar-inverse.navbar-primary .navbar-nav > li > a {
+  color: #fff;
+}
+.navbar-inverse.navbar-primary .navbar-nav > li > a:hover,
+.navbar-inverse.navbar-primary .navbar-nav > li > a:focus {
+  color: #fff;
+  background-color: transparent;
+}
+.navbar-inverse.navbar-primary .navbar-nav > .active > a,
+.navbar-inverse.navbar-primary .navbar-nav > .active > a:hover,
+.navbar-inverse.navbar-primary .navbar-nav > .active > a:focus {
+  color: #fff;
+  background-color: rgba(51, 119, 85, 0.5);
+  background-blend-mode: multiply;
+}
+.navbar-inverse.navbar-primary .navbar-nav > .disabled > a,
+.navbar-inverse.navbar-primary .navbar-nav > .disabled > a:hover,
+.navbar-inverse.navbar-primary .navbar-nav > .disabled > a:focus {
+  color: #444;
+  background-color: transparent;
+}
+.navbar-inverse.navbar-primary .navbar-nav > .open > a,
+.navbar-inverse.navbar-primary .navbar-nav > .open > a:hover,
+.navbar-inverse.navbar-primary .navbar-nav > .open > a:focus {
+  color: #fff;
+  background-color: rgba(51, 119, 85, 0.5);
+  background-blend-mode: multiply;
+}
+@media (max-width: 767px) {
+  .navbar-inverse.navbar-primary .navbar-nav .open .dropdown-menu > .dropdown-header {
+    border-color: #375;
+  }
+  .navbar-inverse.navbar-primary .navbar-nav .open .dropdown-menu .divider {
+    background-color: #375;
+  }
+  .navbar-inverse.navbar-primary .navbar-nav .open .dropdown-menu > li > a {
+    color: #fff;
+  }
+  .navbar-inverse.navbar-primary .navbar-nav .open .dropdown-menu > li > a:hover,
+  .navbar-inverse.navbar-primary .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #fff;
+    background-color: transparent;
+  }
+  .navbar-inverse.navbar-primary .navbar-nav .open .dropdown-menu > .active > a,
+  .navbar-inverse.navbar-primary .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .navbar-inverse.navbar-primary .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #fff;
+    background-color: rgba(51, 119, 85, 0.5);
+  }
+  .navbar-inverse.navbar-primary .navbar-nav .open .dropdown-menu > .disabled > a,
+  .navbar-inverse.navbar-primary .navbar-nav .open .dropdown-menu > .disabled > a:hover,
+  .navbar-inverse.navbar-primary .navbar-nav .open .dropdown-menu > .disabled > a:focus {
+    color: #444;
+    background-color: transparent;
+  }
+}
+.navbar-inverse.navbar-primary .navbar-toggle {
+  border-color: #375;
+}
+.navbar-inverse.navbar-primary .navbar-toggle:hover,
+.navbar-inverse.navbar-primary .navbar-toggle:focus {
+  background-color: rgba(51, 119, 85, 0.5);
+}
+.navbar-inverse.navbar-primary .navbar-toggle .icon-bar {
+  background-color: #fff;
+}
+.navbar-inverse.navbar-primary .navbar-collapse,
+.navbar-inverse.navbar-primary .navbar-form {
+  border-color: #387054;
+}
+.navbar-inverse.navbar-primary .navbar-link {
+  color: #fff;
+}
+.navbar-inverse.navbar-primary .navbar-link:hover {
+  color: #fff;
+}
+.navbar-inverse.navbar-primary .btn-link {
+  color: #fff;
+}
+.navbar-inverse.navbar-primary .btn-link:hover,
+.navbar-inverse.navbar-primary .btn-link:focus {
+  color: #fff;
+}
+.navbar-inverse.navbar-primary .btn-link[disabled]:hover,
+fieldset[disabled] .navbar-inverse.navbar-primary .btn-link:hover,
+.navbar-inverse.navbar-primary .btn-link[disabled]:focus,
+fieldset[disabled] .navbar-inverse.navbar-primary .btn-link:focus {
+  color: #444;
+}
+.navbar-inverse.navbar-primary a.navbar-brand,
+.navbar-inverse.navbar-primary .navbar-nav > li > a {
+  color: #dae7e0;
+}
+.navbar-inverse.navbar-primary a.navbar-brand:hover,
+.navbar-inverse.navbar-primary .navbar-nav > li > a:hover {
+  color: #fff;
+}
+
+/*# sourceMappingURL=styles.css.map */

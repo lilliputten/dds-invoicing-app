@@ -13,10 +13,14 @@
 <p>RUNNING_MANAGE_PY: {{ settings.RUNNING_MANAGE_PY }}</p>
 {% endif %}
 
-{% include 'blocks/navbar/navbar.django' %}
+{% include 'blocks/page-header-navbar/page-header-navbar.django' %}
 {% endblock page_header %}
 
-{% block body %}
+{% block page_body %}
 {{ block.super }}
-{% endblock body %}
+{% endblock page_body %}
 
+{% block page_footer %}
+{% include 'blocks/page-footer-navbar/page-footer-navbar.django' %}
+{{ block.super }}
+{% endblock page_footer %}

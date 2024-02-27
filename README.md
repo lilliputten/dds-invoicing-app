@@ -7,8 +7,8 @@
 
 The DDS invoicing app.
 
-- Version: 0.0.1
-- Last changes timestamp: 2024.02.21 17:17 +0700
+- Version: 0.0.3
+- Last changes timestamp: 2024.02.27 22:54 +0700
 
 TODO: Add the project description.
 
@@ -16,6 +16,8 @@ TODO: Add the project description.
 
 - [CHANGELOG](CHANGELOG.md)
 - [TODO](TODO.md)
+
+- [Sources workflow](src/README.md)
 
 ## Project resources
 

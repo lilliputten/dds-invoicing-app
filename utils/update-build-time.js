@@ -15,9 +15,12 @@ dayjs.extend(dayjsTimezone);
 
 const { getBuildInfo } = require('./gulp-helpers.js');
 
+const buildInfoJsonFilename = 'build-info.json';
+
 const currPath = path.resolve(__dirname);
 const prjPath = path.dirname(path.basename(currPath));
 const srcPath = path.resolve(prjPath, 'src');
+const staticPath = path.resolve(prjPath, 'static');
 
 const configFileName = path.resolve(prjPath, 'utils', 'config.js');
 const config = require(configFileName);
@@ -56,9 +59,6 @@ const timestampFileName = path.resolve(prjPath, 'build-timestamp.txt');
 const timetagFileName = path.resolve(prjPath, 'build-timetag.txt');
 // const versionFileName = path.resolve(prjPath, 'build-version.txt');
 
-// Create source file info if the folder already exists
-const buildInfoJsonFileName = path.resolve(srcPath, 'build-info.json');
-
 console.log('Updated build tag/time:', buildTag, '/', buildTzTime);
 
 // Update timetags...
@@ -66,7 +66,9 @@ fs.writeFileSync(timetagFileName, buildTag, 'utf8');
 fs.writeFileSync(timestampFileName, buildTzTime, 'utf8');
 
 // Write build info data to use in the source code (if the folder already exists)...
-if (fs.existsSync(srcPath)) {
+if (fs.existsSync(staticPath)) {
+  const buildInfoJsonFileName = path.resolve(staticPath, buildInfoJsonFilename);
+  console.log('Creating', buildInfoJsonFilename, 'file...');
   fs.writeFileSync(buildInfoJsonFileName, JSON.stringify(getBuildInfo(), undefined, 2) + '\n', 'utf8');
 }
 

@@ -1,9 +1,7 @@
 {# ex: set ft=htmldjango : #}
 {% extends "!base-main.html.django" %}
 
-{% block title %}Test index {{ block.super }}{% endblock %}
-
-{% block body %}
+{% block page_body %}
 {{ block.super }}
 
 {% if latest_application_list %}
@@ -16,4 +14,6 @@
     <p>No applications are available.</p>
 {% endif %}
 
-{% endblock body %}
+{% include "blocks/components-demo/components-demo.django" %}
+
+{% endblock page_body %}

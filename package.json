@@ -1,9 +1,9 @@
 {
   "name": "dds-invoicing-app",
-  "version": "0.0.1",
-  "timetag": "240221-1717",
-  "timestamp": "2024.02.21 17:17 +0700",
-  "changed": "2024.02.25, 08:15",
+  "version": "0.0.3",
+  "timetag": "240227-2254",
+  "timestamp": "2024.02.27 22:54 +0700",
+  "changed": "2024.02.27, 22:38",
   "browserslist": {
     "production": [
       ">0.2%",
@@ -44,6 +44,7 @@
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^9.0.0",
     "gulp-babel": "^8.0.0",
+    "gulp-clean": "^0.4.0",
     "gulp-concat": "^2.6.1",
     "gulp-less": "^5.0.0",
     "gulp-sourcemaps": "^3.0.0",
@@ -70,6 +71,9 @@
   "scripts": {
     "gulp-assets-update": "echo --Run gulp assets update task-- && npx gulp updateAll",
     "gulp-assets-watcher": "echo --Start gulp assets watcher task-- && npx gulp watchAll",
+    "clear-assets": "echo --Clear generated assets-- && rimraf -g -v static/blocks/**/* static/generated-assets/**/* static/generated-assets/**/.*",
+    "update-assets": "echo --Update generated assets-- && gulp updateAll",
+    "recreate-assets": "echo --Recreate generated assets-- && npm-run-all clear-assets update-assets",
     "livereload-assets-server": "echo --Start livereload server-- && python manage.py livereload static",
     "start-django": "echo --Start django dev server-- && python manage.py runserver 8080",
     "pylint": "echo --Run python linter /pyright, venv/-- && pyright .",

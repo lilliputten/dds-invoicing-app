@@ -1,0 +1,34 @@
+.gradient-tr (@start-color,@start-tr,@end-color,@end-tr) {
+  #gradient > .vertical(@start-color: rgba(red(@start-color),green(@start-color),blue(@start-color),@start-tr); @end-color: rgba(red(@end-color),green(@end-color),blue(@end-color),@end-tr));
+}
+
+.stop-float () {
+  content:'.';
+  visibility:hidden;
+  display:block;
+  height:0;
+  clear:both;
+}
+
+.theme-background () {
+  background-image: url('/static/images/splash/curves-bg/curves-x.svg');
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.theme-background-before () {
+  background-color: @primaryColor;
+  color: #fff;
+  &:before {
+    display: block;
+    content: ' ';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    opacity: .15;
+    .theme-background();
+  }
+}
+

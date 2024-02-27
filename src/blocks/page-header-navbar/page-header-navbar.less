@@ -1,0 +1,20 @@
+/**
+ * @module page-header-navbar
+ * @changed 2024.02.27, 22:10
+ */
+
+.page-header-navbar {
+  // Dark primary navbar with background decor...
+  &.navbar-inverse.navbar-primary {
+    .theme-background-before();
+  }
+  .navbar-header {
+    position: relative;
+  }
+  @media (max-width: @screen-xs-max) {
+    .navbar-header {
+      // background-color: @primaryDarkColor;
+      // background-blend-mode: multiply;
+    }
+  }
+}

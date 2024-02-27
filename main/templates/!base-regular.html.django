@@ -3,6 +3,6 @@
 
 {% block body_class %}regular{% endblock %}
 
-{% block body %}
+{% block page_body %}
 {{ block.super }}
-{% endblock body %}
+{% endblock page_body %}
