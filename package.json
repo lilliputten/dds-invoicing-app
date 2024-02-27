@@ -1,8 +1,8 @@
 {
   "name": "dds-invoicing-app",
-  "version": "0.0.2",
-  "timetag": "240227-0126",
-  "timestamp": "2024.02.27 01:26 +0700",
+  "version": "0.0.3",
+  "timetag": "240227-2254",
+  "timestamp": "2024.02.27 22:54 +0700",
   "changed": "2024.02.27, 22:38",
   "browserslist": {
     "production": [
