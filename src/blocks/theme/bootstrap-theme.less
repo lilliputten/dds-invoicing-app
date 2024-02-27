@@ -3,36 +3,6 @@
  * @see static/vendor/bootstrap-3.4.1/css/bootstrap.css
  */
 
-.btn-default,
-.btn-primary,
-.btn-success,
-.btn-info,
-.btn-warning,
-.btn-danger {
-  transition: all @transitionTime;
-}
-.btn-primary {
-  background-color: @primaryColor;
-  border-color: darken(@primaryColor, 5%);
-}
-.btn-primary:hover,
-.btn-primary:focus {
-  background-color: darken(@primaryColor, 5%);
-  border-color: darken(@primaryColor, 10%);
-}
-.btn-primary:active,
-.btn-primary.active {
-  background-color: darken(@primaryColor, 10%);
-  border-color: darken(@primaryColor, 15%);
-}
-.btn-primary.disabled,
-.btn-primary:disabled,
-.btn-primary[disabled] {
-  @fadeout: 50%;
-  background-color: fadeout(@primaryColor, @fadeout);
-  border-color: fadeout(@primaryColor, @fadeout + 25%);
-}
-
 .panel-primary > .panel-heading,
 .list-group-item.active,
 .list-group-item.active:hover,

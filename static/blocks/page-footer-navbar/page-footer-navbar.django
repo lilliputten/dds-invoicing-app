@@ -1,0 +1,32 @@
+{# ex: set ft=htmldjango : #}
+<!--
+  @module footer
+  @changed 2024.02.27, 20:53
+-->
+
+<footer class="page-footer-navbar navbar">
+  <div class="container-fluid">
+    <div class="navbar-copyright">
+      <a class="navbar-brand" href="/">
+        <img src="{{ settings.STATIC_URL}}images/dds-logo/svg/Green Logo.svg" height="50" />
+        {% comment %}
+          <span>
+            {{ settings.SITE_NAME }}
+          </span>
+        {% endcomment %}
+      </a>
+      <span class="copy-text">
+        &copy; Copyright 2024
+      </span>
+    </div>
+    {% comment %}
+      <div class="navbar-middle">
+        middle
+      </div>
+    {% endcomment %}
+    <ul class="navbar-right nav navbar-nav navbar-right">
+      {% include "blocks/page-menus/menu-plain.django" %}
+    </ul>
+  </div><!-- /.container-fluid -->
+
+</footer>

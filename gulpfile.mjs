@@ -4,10 +4,13 @@ import fs from 'fs';
 import path from 'path';
 
 import gulp from 'gulp';
+
 // import gulpRename from 'gulp-rename';
 // import gulpPrettify from 'gulp-html-prettify';
 
 import gulpConcat from 'gulp-concat';
+
+import gulpClean from 'gulp-clean';
 
 import sourcemaps from 'gulp-sourcemaps';
 import babel from 'gulp-babel';
@@ -33,7 +36,9 @@ import {
 const forceSecondReloadOnWatch = true;
 
 const staticPath = 'static/';
+const blocksPath = 'blocks/';
 const generatedPath = staticPath + 'generated-assets/';
+const targetBlocksPath = staticPath + blocksPath;
 
 const assetsSrcPath = 'src/';
 
@@ -53,7 +58,7 @@ let changedFiles = [];
 /** Use a delay to confirm update of styles for `livereload-assets-server`.
  * Use only if watch task has run.
  */
-const finishGenerationWatchDelay = 2000;
+const finishGenerationWatchDelay = 2500;
 const finishGenerationNormalDelay = 500;
 function onFinishDelayed(resolve, id = 'unknown') {
   if (finishedHandler) {
@@ -94,7 +99,7 @@ function onWatchChange(fname) {
 }
 
 // Scripts...
-const scriptsSrcAll = [assetsSrcPath + 'blocks/**/*.js'];
+const scriptsSrcAll = [assetsSrcPath + blocksPath + '**/*.js'];
 const scriptsDest = generatedPath + 'js/';
 function compileScripts() {
   return (
@@ -117,7 +122,7 @@ gulp.task('compileScriptsWatch', () => {
 });
 
 // Styles...
-const stylesSrcAll = [assetsSrcPath + 'blocks/**/*.less'];
+const stylesSrcAll = [assetsSrcPath + blocksPath + '**/*.less'];
 const stylesSrcEntry = assetsSrcPath + 'blocks-index.less';
 const stylesDest = generatedPath + 'css/';
 const lessConfig = {
@@ -162,6 +167,15 @@ gulp.task('copyAssetsWatch', () => {
   return gulp.watch(assetsSrc, watchOptions, copyAssets);
 });
 
+gulp.task('cleanGenerated', () => {
+  // NOTE: This approach can stuck on phantom files. It's better to use npm's `clear-assets` script
+  return gulp.src([generatedPath + '/**/*', targetBlocksPath + '/**/*'], { read: false }).pipe(
+    gulpClean({
+      force: true,
+    }),
+  );
+});
+
 const updateAllTasks = [
   // Watch all tasks...
   'compileStyles',
@@ -169,6 +183,7 @@ const updateAllTasks = [
   'copyAssets',
 ].filter(Boolean);
 gulp.task('updateAll', gulp.parallel.apply(gulp, updateAllTasks));
+gulp.task('recreateAll', gulp.series(['cleanGenerated', 'updateAll']));
 
 const watchAllTasks = [
   // Watch all tasks...
