@@ -1,6 +1,6 @@
 {# ex: set ft=htmldjango : #}
 
-<div class="page-header">
+<div class="page-header-navbar">
   <h1>Buttons</h1>
 </div>
 <p>
@@ -41,7 +41,7 @@
 </p>
 
 
-<div class="page-header">
+<div class="page-header-navbar">
   <h1>Tables</h1>
 </div>
 <div class="row">
@@ -182,13 +182,13 @@
 </div>
 
 
-<div class="page-header">
+<div class="page-header-navbar">
   <h1>Thumbnails</h1>
 </div>
 <img data-src="holder.js/200x200" class="img-thumbnail" alt="A generic square placeholder image with a white border around it, making it resemble a photograph taken with an old instant camera">
 
 
-<div class="page-header">
+<div class="page-header-navbar">
   <h1>Labels</h1>
 </div>
 <h1>
@@ -249,7 +249,7 @@
 </p>
 
 
-<div class="page-header">
+<div class="page-header-navbar">
   <h1>Badges</h1>
 </div>
 <p>
@@ -262,7 +262,7 @@
 </ul>
 
 
-<div class="page-header">
+<div class="page-header-navbar">
   <h1>Dropdown menus</h1>
 </div>
 <div class="dropdown theme-dropdown clearfix">
@@ -277,7 +277,7 @@
 </div>
 
 
-<div class="page-header">
+<div class="page-header-navbar">
   <h1>Navs</h1>
 </div>
 <ul class="nav nav-tabs" role="tablist">
@@ -292,7 +292,7 @@
 </ul>
 
 
-<div class="page-header">
+<div class="page-header-navbar">
   <h1>Navbars</h1>
 </div>
 
@@ -363,7 +363,7 @@
 </nav>
 
 
-<div class="page-header">
+<div class="page-header-navbar">
   <h1>Alerts</h1>
 </div>
 <div class="alert alert-success" role="alert">
@@ -380,7 +380,7 @@
 </div>
 
 
-<div class="page-header">
+<div class="page-header-navbar">
   <h1>Progress bars</h1>
 </div>
 <div class="progress">
@@ -408,7 +408,7 @@
 </div>
 
 
-<div class="page-header">
+<div class="page-header-navbar">
   <h1>List groups</h1>
 </div>
 <div class="row">
@@ -451,7 +451,7 @@
 </div>
 
 
-<div class="page-header">
+<div class="page-header-navbar">
   <h1>Panels</h1>
 </div>
 <div class="row">
@@ -512,7 +512,7 @@
 </div>
 
 
-<div class="page-header">
+<div class="page-header-navbar">
   <h1>Wells</h1>
 </div>
 <div class="well">
@@ -521,7 +521,7 @@
 
 
 <!--
-<div class="page-header">
+<div class="page-header-navbar">
   <h1>Carousel</h1>
 </div>
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
