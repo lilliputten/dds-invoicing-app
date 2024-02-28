@@ -1,0 +1,36 @@
+[
+  {
+    'True': True,
+    'False': False,
+    'None': None
+  },
+  {},
+  {},
+  {
+    'application': <ApplicationModel: 711f7ccd-b07b-42d4-967f-2a31c311513f>,
+    'form': <ApplicationClientForm bound=False,
+      valid=Unknown,
+      fields=(name;email;text;payment_method;status;payment_status;option_hackaton;option_tshirt)
+    >,
+    'fields': {
+      'name': <django.forms.fields.CharField object at 0x00000241440FF410>,
+      'email': <django.forms.fields.EmailField object at 0x00000241440FC950>,
+      'text': <django.forms.fields.CharField object at 0x00000241440FC980>,
+      'payment_method': <django.forms.fields.TypedChoiceField object at 0x00000241440FCE60>,
+      'status': <django.forms.fields.TypedChoiceField object at 0x00000241440FCEF0>,
+      'payment_status': <django.forms.fields.TypedChoiceField object at 0x00000241440FD0A0>,
+      'option_hackaton': <django.forms.fields.BooleanField object at 0x00000241440FD130>,
+      'option_tshirt': <django.forms.fields.BooleanField object at 0x00000241440FD250>
+    },
+    'field_types': {
+      'name': 'TextInput',
+      'email': 'EmailInput',
+      'text': 'TextInput',
+      'payment_method': 'Select',
+      'status': 'Select',
+      'payment_status': 'Select',
+      'option_hackaton': 'CheckboxInput',
+      'option_tshirt': 'CheckboxInput'
+    }
+  }
+]

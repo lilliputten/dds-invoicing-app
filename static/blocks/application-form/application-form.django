@@ -1,0 +1,57 @@
+{# ex: set ft=htmldjango : #}
+<!--
+  @module application-form
+  @changed 2024.02.28, 01:00
+
+  Expected parameters:
+  - form: ApplicationForm
+  - application: Application
+-->
+
+<p>secret_code: {{ application.secret_code|default_if_none:"" }}</p>
+
+<p>name: {{ form.data.name }}</p>
+
+{% comment %}
+  {% for field_name in form.fields %}
+    [> form.fields[field_name].widget.__class__.__name__ <]
+    {% with field=form.fields[field_name] %}
+      {{ field_name }}: {{ form.fields[field_name].widget.__class__.__name__ }}
+    {% endwith %}
+    {% if type == 'Select' %}
+      SELECT
+    {% endif %}
+  {% endfor %}
+{% endcomment %}
+
+{% for id in field_types %}
+  {% with type=field_types|dict_key:id %}
+    {{ id }}: {{ form_data|multi_dict_key:id }}
+    {% if type == "TextInput" or type == "EmailInput" %}
+      TEXT
+    {% elif type == "CheckboxInput" %}
+      CHECKBOX
+    {% elif type == "Select" %}
+      SELECT
+      {% with choices=select_choices|dict_key:id %}
+        {% comment %} SELECT: {{ choices }} {% endcomment %}
+        {% for choice in choices %}
+          {{ choice.0 }}
+        {% endfor %}
+      {% endwith %}
+    {% endif %}
+  {% endwith %}
+{% endfor %}
+
+<div class="form-group">
+  <label for="@name">Name</label>
+  <input type="text" class="form-control" id="@name" placeholder="Name">
+</div>
+
+<!--
+  TODO: Generate form from passed form object:
+
+    email = models.EmailField(max_length=80, null=False, blank=False)
+    text = models.CharField(max_length=200, blank=True)  # Comment
+
+-->
