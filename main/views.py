@@ -39,7 +39,7 @@ def detail(request: HttpRequest, application_id: str):
 def new_application(request: HttpRequest):
     # Empty application...
     application = ApplicationModel()
-    application.name = CharField('Test')
+    application.name = 'Test'  # pyright: ignore [reportAttributeAccessIssue]
     form = ApplicationClientForm(instance=application)
     form.is_valid()
     fields = form.fields
@@ -50,7 +50,7 @@ def new_application(request: HttpRequest):
         "fields": fields,
         "field_types": {id: fields[id].widget.__class__.__name__ for id in fields},
         "select_choices": {id: fields[id].choices if fields[id].widget.__class__.__name__ == 'Select' else None
-            for id in fields},
+                           for id in fields},
     }
     #  list = tuple((id, fields[id].widget.__class__.__name__) for id in fields)
     DEBUG('Debug form props', get_object_props(form))

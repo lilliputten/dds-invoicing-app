@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-import posixpath, re
+import posixpath
+import re
 import sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -34,14 +35,16 @@ print('RUNNING_MOD_WSGI', RUNNING_MOD_WSGI)
 print('LOCAL', LOCAL)
 print('DEV', DEV)
 
-DEV_MAKET_MODE = LOCAL and False  # Try to compile js & css resources on-the-fly, alternatively it's possible to use `livereload-assets-server` (see below)
+# Try to compile js & css resources on-the-fly, alternatively it's
+# possible to use `livereload-assets-server` (see below)
+DEV_MAKET_MODE = LOCAL and False
 BLOCKS_FILES_SCAN = DEV_MAKET_MODE
 SHOW_DJANGO_TOOLBAR = True
-COMPRESS_ENABLED = not LOCAL # not DEV_MAKET_MODE
+COMPRESS_ENABLED = not LOCAL  # not DEV_MAKET_MODE
 USE_PRECOMPILERS = False
 USE_FAKE_DB = False
 
-BEAUTIFY_HTML = not LOCAL # COMPRESS_ENABLED
+BEAUTIFY_HTML = not LOCAL  # COMPRESS_ENABLED
 BEAUTIFY_HTML_OPTIONS = {
     'REPLACE_BEGINNING_SPACES': False,
     'REMOVE_FOLDS': True,
@@ -68,7 +71,7 @@ MEDIA_ROOT = posixpath.join(BASE_DIR, MEDIA_FOLDER, '')
 MEDIA_URL = posixpath.join('/', MEDIA_FOLDER, '')
 
 BLOCKS_FOLDER = posixpath.join('blocks', '')
-BLOCKS_ROOT = posixpath.join(STATIC_ROOT, BLOCKS_FOLDER, '' )
+BLOCKS_ROOT = posixpath.join(STATIC_ROOT, BLOCKS_FOLDER, '')
 
 #  TEMPLATES_PATH = STATIC_FOLDER # posixpath.join(STATIC_FOLDER, 'templates', '')  # TODO?
 
@@ -102,7 +105,7 @@ ALLOWED_HOSTS = [
     #  # TODO: Add other actual domains
 ]
 if DEV:
-    ALLOWED_HOSTS.insert(0, 'localhost');
+    ALLOWED_HOSTS.insert(0, 'localhost')
 
 # Application definition
 
@@ -134,16 +137,16 @@ MIDDLEWARE = [
 ]
 
 # Add livereload app...
-INSTALLED_APPS.insert(0, 'livereload');
+INSTALLED_APPS.insert(0, 'livereload')
 if False or DEV:
-    MIDDLEWARE.append('livereload.middleware.LiveReloadScript');
+    MIDDLEWARE.append('livereload.middleware.LiveReloadScript')
 
 ROOT_URLCONF = 'django_project.urls'
 
 # Extra templates folders...
 TEMPLATES_DIRS = [STATIC_ROOT]
 if DEV:
-    TEMPLATES_DIRS.append(ASSETS_ROOT);
+    TEMPLATES_DIRS.append(ASSETS_ROOT)
 
 TEMPLATES = [
     {
@@ -156,7 +159,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                APP_NAME+'.context_processors.common_values',  # Pass local context to the templates. @see `main/context_processors.py`
+                APP_NAME + '.context_processors.common_values',  # Pass local context to the templates. @see `main/context_processors.py`
             ],
         },
         'DIRS': TEMPLATES_DIRS,
@@ -229,7 +232,8 @@ application
 SITE_KEYWORDS = re.sub(r'\s*[\n\r]+\s*', ', ', SITE_KEYWORDS.strip())
 #  print(u'keywords: %s ' % SITE_KEYWORDS)
 
-if DEV: SITE_TITLE += ' (DEV)'
+if DEV:
+    SITE_TITLE += ' (DEV)'
 
 # Pass settings to context...
 PASS_VARIABLES = {

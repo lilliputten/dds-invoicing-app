@@ -34,6 +34,7 @@ print('XXX', settings.ROOT_PATH)
 #  outputLog
 #  outputColoredLog
 
+
 def getDateStr(now=None, isDetailed=False):
     if now is None or not now:
         now = datetime.datetime.now()  # Get current date object
