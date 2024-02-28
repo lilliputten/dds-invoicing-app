@@ -1,5 +1,5 @@
-from .ApplicationModel import ApplicationModel
+from .Application import Application
 
 __all__ = [
-    'ApplicationModel'
+    'Application'
 ]

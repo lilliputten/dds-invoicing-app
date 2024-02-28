@@ -12,7 +12,7 @@ from core.constants.date_time_formats import dateTimeFormat
 # https://docs.djangoproject.com/en/5.0/intro/tutorial04/
 # https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Models
 
-class ApplicationModel(models.Model):
+class Application(models.Model):
 
     # Generated:
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -71,10 +71,10 @@ class ApplicationModel(models.Model):
 
 #  # TODO: Use choices as options
 #  class Choice(models.Model):
-#      application = models.ForeignKey(ApplicationModel, on_delete=models.CASCADE)
+#      application = models.ForeignKey(Application, on_delete=models.CASCADE)
 #      choice_text = models.CharField(max_length=200)
 #      votes = models.IntegerField(default=0)  # pyright: ignore [reportArgumentType]
 
 __all__ = [
-    'ApplicationModel',
+    'Application',
 ]
