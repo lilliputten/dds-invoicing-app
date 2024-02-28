@@ -1,0 +1,14 @@
+{# ex: set ft=htmldjango : #}
+{% extends "!base-regular.html.django" %}
+
+{% block title %}Server error (500) &mdash; {{ block.super }}{% endblock title %}
+
+{% block page_body %}
+{{ block.super }}
+  <div class="row">
+      <div class="col-lg-12">
+          <h3>Server error (500)</h3>
+          <p>See server log for details.</p>
+      </div>
+  </div>
+{% endblock page_body %}

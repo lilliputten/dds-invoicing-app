@@ -16,24 +16,6 @@ from core.constants import date_time_formats
 
 from . import yamlSupport
 
-print('XXX', settings.ROOT_PATH)
-
-# reg: \<settings\.\(detailedDateFormat\|preciseDateFormat\|detailedDateFormat\|logDateFormat\|logDateFormat\|detailedDateFormat\)\>
-# reg: \<settings\.\(clearLogFile\|writeLog\|logFileName\|outputLog\|outputColoredLog\)\>
-
-#  detailedDateFormat
-#  preciseDateFormat
-#  detailedDateFormat
-#  logDateFormat
-#  logDateFormat
-#  detailedDateFormat
-#  clearLogFile
-#  writeLog
-#  rootPath
-#  logFileName
-#  outputLog
-#  outputColoredLog
-
 
 def getDateStr(now=None, isDetailed=False):
     if now is None or not now:

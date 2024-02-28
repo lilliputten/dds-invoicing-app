@@ -1,10 +1,11 @@
 <!--
 @since 2024.02.21, 16:56
-@changed 2024.02.21, 16:56
+@changed 2024.02.28, 20:38
 -->
 
 # TODO
 
+- 2024.02.28, 20:38 -- Use `setup.cfg`.
 - 2023.11.28, 04:22 -- Fix `WithSidePanels` side panels behavior on resize. Ideally to use library to support panels resizing.
 - 2023.11.28, 03:20 -- Color selector: Remove second slider (transparency?), fix entering the color by text (it's conflicting with immediatley updates).
 - 2023.11.27, 16:53 -- Check bundle size. See info at [cra-template/readme](https://github.com/facebook/create-react-app/blob/main/packages/cra-template/template/README.md).
