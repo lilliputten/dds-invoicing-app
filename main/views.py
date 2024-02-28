@@ -139,3 +139,7 @@ def page500(request, *args, **argv):
         'argv': argv,
     })
     return render(request, '500.html', {}, status=500)
+
+
+# Other errors:
+# 502: Gateway Timeout
