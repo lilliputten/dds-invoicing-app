@@ -1,9 +1,9 @@
 {
-  "name": "react-flow-app",
-  "version": "0.0.2",
-  "timetag": "240223-0029",
-  "timestamp": "2024.02.23 00:29 +0700",
-  "changed": "2024.02.21, 16:53",
+  "name": "dds-invoicing-app",
+  "version": "0.0.4",
+  "timetag": "240229-0020",
+  "timestamp": "2024.02.29 00:20 +0700",
+  "changed": "2024.02.27, 22:38",
   "browserslist": {
     "production": [
       ">0.2%",
