@@ -1,17 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse
 from django.template import loader
-from django import template
 from django.shortcuts import render
-from django.http import Http404
 from django.shortcuts import get_object_or_404, render
-from django.forms import ModelForm
-from django.urls import reverse
+from django.forms import CharField
 from django.views import generic
 
-import re
 
 from core.helpers.debug_helpers import get_object_props
+from core.helpers.logger import DEBUG
 
 from .ApplicationForm import ApplicationForm, ApplicationClientForm
 from .models import ApplicationModel
@@ -42,7 +39,7 @@ def detail(request: HttpRequest, application_id: str):
 def new_application(request: HttpRequest):
     # Empty application...
     application = ApplicationModel()
-    application.name = 'Test'
+    application.name = CharField('Test')
     form = ApplicationClientForm(instance=application)
     form.is_valid()
     fields = form.fields
@@ -56,7 +53,7 @@ def new_application(request: HttpRequest):
             for id in fields},
     }
     #  list = tuple((id, fields[id].widget.__class__.__name__) for id in fields)
-    print('YYY', get_object_props(form))
+    DEBUG('Debug form props', get_object_props(form))
     #  print('XXX', fields['status'].choices)
     #  name: TextInput
     #  email: EmailInput
