@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib import admin
 
-from .models import Application
+from .models import ApplicationModel
 
 
 class CustomApplicationForm(forms.ModelForm):
@@ -9,7 +9,7 @@ class CustomApplicationForm(forms.ModelForm):
     #  secret_code = forms.UUIDField()
 
     class Meta:
-        model = Application
+        model = ApplicationModel
         #  fields = ('secret_code', 'created_at')
         readonly_fields = ('secret_code', 'created_at')
         exclude = ('id',)
@@ -22,4 +22,4 @@ class ApplicationAdmin(admin.ModelAdmin):
     form = CustomApplicationForm
 
 
-admin.site.register(Application)
+admin.site.register(ApplicationModel)

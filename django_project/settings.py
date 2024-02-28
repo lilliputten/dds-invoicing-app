@@ -16,6 +16,7 @@ import sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+ROOT_PATH = BASE_DIR
 
 # Determine dev mode...
 
@@ -230,8 +231,7 @@ SITE_KEYWORDS = re.sub(r'\s*[\n\r]+\s*', ', ', SITE_KEYWORDS.strip())
 
 if DEV: SITE_TITLE += ' (DEV)'
 
-
-# pass settings to context
+# Pass settings to context...
 PASS_VARIABLES = {
     # DEBUG: Debug only!
     'RUNNING_DEVSERVER': RUNNING_DEVSERVER,

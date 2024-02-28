@@ -14,6 +14,8 @@
     <p>No applications are available.</p>
 {% endif %}
 
+{% comment %}
 {% include "blocks/components-demo/components-demo.django" %}
+{% endcomment %}
 
 {% endblock page_body %}

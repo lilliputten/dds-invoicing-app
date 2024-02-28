@@ -102,6 +102,17 @@
         // "--web-port",
         // "8080"
       ]
+    },
+    {
+      "name": "Django server",
+      "type": "python",
+      "request": "launch",
+      "program": "manage.py",
+      "args": [
+        "runserver",
+        "8080"
+      ],
+      "console": "integratedTerminal"
     }
   ]
 }

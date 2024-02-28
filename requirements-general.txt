@@ -5,3 +5,5 @@
 Django==5.0.2
 django-compressor==4.4
 django-livereload-server==0.5.1
+PyYAML==6.0.1
+termcolor==2.4.0
