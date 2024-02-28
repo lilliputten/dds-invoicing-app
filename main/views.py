@@ -93,7 +93,7 @@ def create_new_application(request: HttpRequest):
     except Exception as err:
         #  sError = errors.toString(err, show_stacktrace=False)
         sTraceback = str(traceback.format_exc())
-        DEBUG(getTrace('Cought error'), {
+        DEBUG(getTrace('Caught error'), {
             'err': err,
             'traceback': sTraceback,
         })
