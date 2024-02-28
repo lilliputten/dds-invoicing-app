@@ -34,14 +34,19 @@ if settings.DEBUG:
 
 #  # TODO: Add different location depnding on dev/prod mode (see examples below)...
 #  if settings.DEBUG:
-#      #  urlpatterns += patterns(
-#      #      '',
-#      #      # url(r'^400/$', TemplateView.as_view(template_name='400.html.django')),
-#      #      url(r'^403/$', TemplateView.as_view(template_name='403.html.django')),
-#      #      url(r'^404/$', 'django.views.defaults.page_not_found'),
-#      #      url(r'^500/$', 'django.views.defaults.server_error'),
-#      #  )
-#  #  else:
-#  #      handler403 = views.page403
-#  #      handler404 = views.page404
-#  #      handler500 = views.page500
+#      pass
+#      urlpatterns += patterns(
+#          '',
+#          # url(r'^400/$', TemplateView.as_view(template_name='400.html.django')),
+#          url(r'^403/$', TemplateView.as_view(template_name='403.html.django')),
+#          url(r'^404/$', 'django.views.defaults.page_not_found'),
+#          url(r'^500/$', 'django.views.defaults.server_error'),
+#      )
+#  else:
+#      #  handler403 = views.page403
+#      #  handler404 = views.page404
+#      #  handler500 = views.page500
+
+handler403 = 'main.views.page403'
+handler404 = 'main.views.page404'
+handler500 = 'main.views.page500'

@@ -1,0 +1,14 @@
+{# ex: set ft=htmldjango : #}
+{% extends "!base-regular.html.django" %}
+
+{% block title %}Forbidden (403) &mdash; {{ block.super }}{% endblock title %}
+
+{% block page_body %}
+{{ block.super }}
+  <div class="row">
+      <div class="col-lg-12">
+          <h3>Forbidden (404)</h3>
+          <p>See server log for details.</p>
+      </div>
+  </div>
+{% endblock page_body %}

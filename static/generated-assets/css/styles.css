@@ -9,9 +9,6 @@ body {
 /**
  * @module debug
  */
-label {
-  color: blue;
-}
 /**
  * @module dev
  */
@@ -109,6 +106,7 @@ label {
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee;
   margin-bottom: 0;
+  margin-top: 20px;
 }
 .page-footer-navbar .container-fluid {
   display: flex;
@@ -387,6 +385,12 @@ fieldset[disabled] .navbar-inverse.navbar-primary .btn-link:focus {
 .navbar-inverse.navbar-primary a.navbar-brand:hover,
 .navbar-inverse.navbar-primary .navbar-nav > li > a:hover {
   color: #fff;
+}
+/**
+ * @module theme-fixes
+ */
+.form-actions {
+  margin-top: 20px;
 }
 
 /*# sourceMappingURL=styles.css.map */

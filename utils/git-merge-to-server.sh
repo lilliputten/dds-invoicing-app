@@ -1,6 +1,6 @@
 #!/bin/sh
 # @desc Initialize python venv
-# @changed 2024.02.24, 14:48
+# @changed 2024.02.29, 00:19
 
 TARGET_SERVER_BRANCH="server"
 
@@ -28,3 +28,7 @@ git checkout $TARGET_SERVER_BRANCH \
   git push && \
   git checkout $CURRENT_BRANCH && \
   echo Ok
+
+# Alternate approach (for the case of conflicts):
+# git rebase -X theirs $CURRENT_BRANCH && \
+# git push --force-with-lease && \

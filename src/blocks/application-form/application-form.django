@@ -1,0 +1,96 @@
+{# ex: set ft=htmldjango : #}
+<!--
+  @module application-form
+  @changed 2024.02.28, 01:00
+
+  Expected parameters:
+  - form: ApplicationForm
+
+  See:
+  - https://bootstrapdocs.com/v3.3.4/docs/css/#forms
+-->
+
+{% comment %}
+  Eg: {'name': ['This field is required.'], 'email': ['This field is required.']}
+{% if form.errors %}
+  <p>Errors</p>
+  {% for errorId in form.errors %}
+    <div class="alert alert-danger" role="alert">
+      <strong>{{ errorId|capitalize_id_title }}:</strong>
+      {{ form.errors|getattr:errorId }}
+    </div>
+  {% endfor %}
+{% endif %}
+{% endcomment %}
+
+{% if messages %}
+  {% for message in messages %}
+    {% if message.tags == 'error' %}
+      <div class="alert alert-danger alert-dismissible" role="alert">
+        <strong>{{ message }}</strong>
+      </div>
+    {% endif %}
+    {% if message.tags == 'success' %}
+      <div class="alert alert-success alert-dismissible" role="alert">
+        <strong>{{ message }}</strong>
+      </div>
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% for fieldId in form.fields %}
+  {% comment %}
+  {% with type=field_types|dict_key:fieldId %}
+  {% endcomment %}
+  {% with type=form|form_field_type:fieldId %}
+    {% comment %}
+      {{ fieldId }} / {{ fieldId|capitalize_id_title }}: {{ form.instance|getattr:fieldId }}
+    {% endcomment %}
+    {% if type == "TextInput" or type == "EmailInput" %}
+      {% comment %} <div>TEXT [{{ fieldId}}] {{ fieldId|capitalize_id_title }}</div> {% endcomment %}
+      <div class="form-group{% if fieldId in form.errors %} has-error{% endif %}">
+        <label for="@{{ fieldId }}">{{ fieldId|capitalize_id_title }}</label>
+        <input
+          name="{{ fieldId }}"
+          id="@{{ fieldId }}"
+          type="{% if type == "EmailInput" %}email{% else %}text{% endif %}"
+          class="form-control"
+          placeholder="{{ fieldId|capitalize_id_title }}"
+          value="{{ form.instance|getattr:fieldId }}"
+        />
+      </div>
+    {% elif type == "CheckboxInput" %}
+      {% comment %} <div>CHECKBOX [{{ fieldId}}] {{ fieldId|capitalize_id_title }}</div> {% endcomment %}
+      <div class="checkbox{% if fieldId in form.errors %} has-error{% endif %}">
+        <label>
+          <input
+            name="{{ fieldId }}"
+            id="@{{ fieldId }}"
+            type="checkbox"
+            {% if form.instance|getattr:fieldId %}checked{% endif %}
+          >
+          {{ fieldId|capitalize_id_title }}
+        </label>
+      </div>
+    {% elif type == "Select" %}
+      {% comment %} <div>SELECT [{{ fieldId}}] {{ fieldId|capitalize_id_title }} = {{ form.instance|getattr:fieldId }}</div> {% endcomment %}
+      <div class="form-group{% if fieldId in form.errors %} has-error{% endif %}">
+        <label for="@{{ fieldId }}">{{ fieldId|capitalize_id_title }}</label>
+        <select
+          name="{{ fieldId }}"
+          id="@{{ fieldId }}"
+          class="form-control"
+        >
+          {% comment %}
+          {% with choices=select_choices|dict_key:fieldId %}
+          {% endcomment %}
+          {% with choices=form|form_select_choices:fieldId %}
+            {% for choice in choices %}
+            <option value="{{ choice.0 }}" {% if choice.0 == form.instance|getattr:fieldId %}selected{% endif %}>{{ choice.1 }}</option>
+            {% endfor %}
+          {% endwith %}
+        </select>
+      </div>
+    {% endif %}
+  {% endwith %}
+{% endfor %}
