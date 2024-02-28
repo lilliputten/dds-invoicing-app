@@ -17,6 +17,7 @@ from .ApplicationModel import ApplicationModel
 
 DEBUG('Test', {'test': 1})
 
+
 class ApplicationClientForm(ModelForm):
     asAdmin: bool
 
@@ -43,4 +44,3 @@ class ApplicationForm(ModelForm):
         model = ApplicationModel
         exclude = ('id', 'secret_code')
         fields = '__all__'
-

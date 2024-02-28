@@ -16,7 +16,7 @@ class ApplicationModel(models.Model):
 
     # Generated:
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    secret_code = models.UUIDField(default=uuid.uuid4)  #, editable=False)
+    secret_code = models.UUIDField(default=uuid.uuid4)  # , editable=False)
     #  secret_code = models.CharField(max_length=100)  # (generated)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -59,7 +59,7 @@ class ApplicationModel(models.Model):
             str(self.name) if self.name else None,
             #  str(self.created_at) if self.created_at else "",
             self.created_at.strftime(dateTimeFormat)  # pyright: ignore [reportAttributeAccessIssue]
-                if self.created_at else None,
+            if self.created_at else None,
         ])))
         info = " (" + info + ")" if info else None
         info = " ".join(list(filter(None, [
