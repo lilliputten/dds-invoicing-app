@@ -12,7 +12,7 @@ from core.helpers.logger import DEBUG
 from core.helpers.utils import capitalize_id, getTrace
 
 from .ApplicationForm import ApplicationClientForm
-from .models import ApplicationModel
+from .models import Application
 
 """
 Save form:
@@ -22,7 +22,7 @@ Save form:
 
 #  # Class-based template demo
 #  class DetailView(generic.DetailView):
-#      model = ApplicationModel
+#      model = Application
 #      template_name = "detail.html"
 
 
@@ -32,7 +32,7 @@ def components_demo(request: HttpRequest):
 
 def review_application(request: HttpRequest, application_id: str):
     # Find application by id...
-    application = get_object_or_404(ApplicationModel, pk=application_id)
+    application = get_object_or_404(Application, pk=application_id)
     form = ApplicationClientForm(instance=application)
     context = {"application": application, "form": form}
     return render(request, "review-application.html.django", context)
@@ -73,7 +73,7 @@ def create_new_application(request: HttpRequest):
         DEBUG(getTrace('Render new form'))
         if not form:
             # Create empty application...
-            application = ApplicationModel()
+            application = Application()
             #  # DEBUG: Provide some test data for a fresh application...
             #  application.name = 'Test'  # pyright: ignore [reportAttributeAccessIssue]
             #  application.option_hackaton = True
@@ -104,7 +104,7 @@ def create_new_application(request: HttpRequest):
 
 def index(request: HttpRequest):
     #  return HttpResponse("Hello, world. You're at the main index.")  # pyright: ignore [reportArgumentType]
-    latest_application_list = ApplicationModel.objects.order_by(  # pyright: ignore [reportAttributeAccessIssue]
+    latest_application_list = Application.objects.order_by(  # pyright: ignore [reportAttributeAccessIssue]
         "-created_at")[:5]
     #  output = ", ".join([q.email for q in latest_application_list])
     #  return HttpResponse(output)

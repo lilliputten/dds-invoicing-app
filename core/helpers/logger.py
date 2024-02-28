@@ -7,7 +7,7 @@ import math
 from os import path
 import datetime
 import yaml
-#  from termcolor import colored
+from termcolor import colored
 
 from django.conf import settings
 
@@ -91,10 +91,10 @@ def DEBUG(title, data=None):
         with open(logFile, fileMode) as file:
             file.write((header + '\n' + title + '\n' + logData + '\n').encode('utf-8'))
     if logging_options.outputLog:
-        #  # NOTE: This code breaks server execution too
-        #  if logging_options.outputColoredLog:
-        #      header = colored(header, 'green')
-        #      title = colored(title, 'red')
+        #  # NOTE: This code breaks server execution (apache logging system)
+        if logging_options.outputColoredLog:
+            header = colored(header, 'green')
+            title = colored(title, 'red')
         print(header + "\n" + title + "\n" + logData)
         #  print(header)
         #  print(title)
