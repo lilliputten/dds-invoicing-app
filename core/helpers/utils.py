@@ -108,6 +108,14 @@ def getTrace(appendStr=None):
     return traceResult
 
 
+def capitalize_id(id: str):
+    if id == 'uuid':
+        return 'UUID'
+    text = re.sub(r'_', ' ', id)
+    text = text.capitalize()
+    return text
+
+
 __all__ = [  # Exporting objects...
     'empty',
     'notEmpty',
@@ -120,4 +128,5 @@ __all__ = [  # Exporting objects...
     'truncateLongString',
     'prepareLongString',
     'getTrace',
+    'capitalize_id,
 ]

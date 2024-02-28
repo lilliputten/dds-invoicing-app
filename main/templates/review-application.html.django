@@ -1,18 +1,18 @@
 {# ex: set ft=htmldjango : #}
-{% extends "!base-main.html.django" %}
+{% extends "!base-regular.html.django" %}
 
-{% block title %}Apply for participation &mdash; {{ block.super }}{% endblock %}
+{% block title %}Review application &mdash; {{ block.super }}{% endblock %}
 
 {% block page_body %}
 {{ block.super }}
 
-<form action="{% url 'application:create_application' %}" method="post">
+<form action="{% url 'application:review_application' form.instance.id %}" method="post">
 
 {% csrf_token %}
 
 <fieldset>
   <legend>
-    <h1>Apply for participation</h1>
+    <h1>Review application</h1>
     <p>Some application explanations...</p>
   </legend>
   {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
