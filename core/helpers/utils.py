@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 # @module utils
 # @since 2020.02.23, 02:18
-# @changed 2023.02.14, 23:45
+# @changed 2024.02.29, 00:19
 
 
 import traceback
@@ -128,5 +128,5 @@ __all__ = [  # Exporting objects...
     'truncateLongString',
     'prepareLongString',
     'getTrace',
-    'capitalize_id,
+    'capitalize_id',
 ]
