@@ -1,0 +1,23 @@
+{# ex: set ft=htmldjango : #}
+{% extends "!base-main.html.django" %}
+
+{% block title %}Application &mdash;{{ application.id }} {{ block.super }}{% endblock %}
+
+{% block page_body %}
+{{ block.super }}
+
+<form action="{% url 'application:detail' application.id %}" method="post">
+{% csrf_token %}
+
+<fieldset>
+    <legend><h1>{{ application.id }}</h1></legend>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+</fieldset>
+
+{% include "blocks/application-form/application-form.django" %}
+
+<button type="submit" class="btn btn-default">Save</button>
+
+</form>
+
+{% endblock page_body %}
