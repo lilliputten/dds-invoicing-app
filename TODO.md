@@ -1,10 +1,12 @@
 <!--
 @since 2024.02.21, 16:56
-@changed 2024.02.28, 20:38
+@changed 2024.02.29, 20:36
 -->
 
 # TODO
 
+- 2024.02.29, 20:35 -- Use `Site.objects.get_current().name` (via `from django.contrib.sites.models import Site`) as site title.
+- 2024.02.29, 03:33 -- Prload visual.
 - 2024.02.28, 20:38 -- Use `setup.cfg`.
 - 2023.11.28, 04:22 -- Fix `WithSidePanels` side panels behavior on resize. Ideally to use library to support panels resizing.
 - 2023.11.28, 03:20 -- Color selector: Remove second slider (transparency?), fix entering the color by text (it's conflicting with immediatley updates).

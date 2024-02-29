@@ -11,6 +11,7 @@ from core.constants.date_time_formats import dateTimeFormat
 # See:
 # https://docs.djangoproject.com/en/5.0/intro/tutorial04/
 # https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Models
+# https://realpython.com/customize-django-admin-python/#modifying-a-change-list-using-list_display
 
 class Application(models.Model):
 

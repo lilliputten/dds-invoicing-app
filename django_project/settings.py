@@ -15,9 +15,11 @@ import posixpath
 import re
 import sys
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Define default site id for `sites.models`
+SITE_ID = 1
+
+# Root project path: Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-ROOT_PATH = BASE_DIR
 
 # Determine dev mode...
 
@@ -114,11 +116,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     # Extra apps...
     #  'social.apps.django_app.default',
     #  'bootstrapform',
     'compressor',
+
+    # @see: https://github.com/praekelt/django-preferences
+    'preferences',
 
     # Local apps...
     'main.apps.MainConfig',
@@ -157,6 +163,10 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                # @see: https://github.com/praekelt/django-preferences
+                'preferences.context_processors.preferences_cp',
+
                 APP_NAME + '.context_processors.common_values',  # Pass local context to the templates. @see `main/context_processors.py`
             ],
         },
@@ -216,9 +226,76 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# performed by this configuration is to send an email to
+# the site admins on every HTTP 500 error.
+# See http://docs.djangoproject.com/en/dev/topics/logging for
+# more details on how to customize your logging configuration.
+#
+# Logging levels:
+#
+# - DEBUG: Low level system information for debugging purposes
+# - INFO: General system information
+# - WARNING: Information describing a minor problem that has occurred.
+# - ERROR: Information describing a major problem that has occurred.
+# - CRITICAL: Information describing a critical problem that has occurred.
+#
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    # 'incremental': True,
+    'formatters': {
+        'verbose': {
+            'format': "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            'datefmt': "%Y.%m.%d %H:%M:%S"
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        },
+    },
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        },
+        'django': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': posixpath.join(BASE_DIR, 'log-django.log'),
+            'formatter': 'verbose'
+        },
+        'apps': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': posixpath.join(BASE_DIR, 'log-apps.log'),
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['django'],
+            'propagate': True,
+            'level': 'INFO',
+        },
+        'django_project': {
+            'handlers': ['apps'],
+            'level': 'DEBUG',
+        },
+        APP_NAME: {
+            'handlers': ['apps'],
+            'level': 'DEBUG',
+        },
+    },
+}
 
 # Site config
 
+# TODO: Use `Site.objects.get_current().name` (via `from django.contrib.sites.models import Site`) as site title.
 SITE_NAME = u'DDS Invoicing'
 SITE_TITLE = SITE_NAME
 SITE_DESCRIPTION = u'DDS Invoicing'
