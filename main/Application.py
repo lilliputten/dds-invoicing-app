@@ -70,11 +70,11 @@ class Application(models.Model):
         return info
 
 
-#  # TODO: Use choices as options
+#  # TODO: Use options
 #  class Choice(models.Model):
 #      application = models.ForeignKey(Application, on_delete=models.CASCADE)
-#      choice_text = models.CharField(max_length=200)
-#      votes = models.IntegerField(default=0)  # pyright: ignore [reportArgumentType]
+#      option_text = models.CharField(max_length=200)
+
 
 __all__ = [
     'Application',
