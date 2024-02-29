@@ -1,10 +1,10 @@
 {
   "projectName": "dds-invoicing-app",
-  "timestamp": "2024.02.29 00:20 +0700",
-  "timetag": "240229-0020",
-  "version": "0.0.4",
-  "currentTimeStr": "2024.02.29 00:20 +0700",
-  "currentTimeTag": "240229-0020",
-  "gitCommitHash": "8d72955",
-  "gitBranch": "6-apllication-form"
+  "timestamp": "2024.02.29 21:00 +0700",
+  "timetag": "240229-2100",
+  "version": "0.0.5",
+  "currentTimeStr": "2024.02.29 21:00 +0700",
+  "currentTimeTag": "240229-2100",
+  "gitCommitHash": "0a4b125",
+  "gitBranch": "13-app-parameters"
 }
