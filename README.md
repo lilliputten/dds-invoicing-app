@@ -8,7 +8,7 @@
 The DDS invoicing app.
 
 - Version: 0.0.5
-- Last changes timestamp: 2024.02.29 21:00 +0700
+- Last changes timestamp: 2024.02.29 21:54 +0700
 
 TODO: Add the project description.
 
