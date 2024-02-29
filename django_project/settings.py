@@ -213,17 +213,18 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
+# https://docs.djangoproject.com/en/2.0/ref/settings/#time-zone
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
+USE_TZ = True
 USE_I18N = False
-
 USE_L10N = False
 
-USE_TZ = True
-
+# @see: https://docs.djangoproject.com/en/2.0/ref/templates/builtins/#std:templatefilter-date
+DATE_FORMAT = 'Y.m.d'
+TIME_FORMAT = 'H:i'
+DATETIME_FORMAT = DATE_FORMAT + TIME_FORMAT
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -296,6 +297,12 @@ LOGGING = {
         },
     },
 }
+
+# Misc
+
+# @see: https://docs.djangoproject.com/en/2.0/ref/settings/#timeout
+TIMEOUT = 30 if DEBUG else 300  # Short value for debug time
+
 
 # Site config
 
