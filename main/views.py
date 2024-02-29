@@ -6,13 +6,25 @@ from django.template import loader
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404, render
 from django.contrib import messages
+#  from django.core.mail import send_mail
+from django.contrib.sites.models import Site
+#  from django.contrib.sites.managers import CurrentSiteManager
 
-# from core.helpers.debug_helpers import get_all_object_props, get_object_entry_names, get_object_entry_names_and_types, get_object_props
+from django.views.generic import DetailView, CreateView, UpdateView, ListView, DeleteView, TemplateView
+
+#  from core.helpers.debug_helpers import get_all_object_props, get_object_entry_names, get_object_entry_names_and_types, get_object_props
 from core.helpers.logger import DEBUG
 from core.helpers.utils import capitalize_id, getTrace
 
 from .ApplicationForm import ApplicationClientForm
 from .models import Application
+
+
+#  # DEMO: Useing native django logger
+#  import logging
+#  LOG = logging.getLogger(__name__)
+#  LOG.info('Test')
+
 
 """
 Save form:
@@ -20,7 +32,7 @@ Save form:
 """
 
 
-#  # Class-based template demo
+#  # DEMO: Class-based template demo
 #  class DetailView(generic.DetailView):
 #      model = Application
 #      template_name = "detail.html"
@@ -115,7 +127,18 @@ def index(request: HttpRequest):
     return HttpResponse(template.render(context, request))
 
 
+class RobotsView(TemplateView):
+
+    template_name = 'robots.txt'
+    content_type = 'text/plain'
+
+    def get_context_data(self, **kwargs):
+        context = super(RobotsView, self).get_context_data(**kwargs)
+        context['domain'] = Site.objects.get_current().domain
+        return context
+
 # Error pages...
+
 
 def page403(request, *args, **argv):
     DEBUG(getTrace('403 error'), {
