@@ -9,6 +9,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('main', '0005_remove_allowedemail_id_alter_allowedemail_email'),
+        # ('preferences', '0002_auto_20181220_0803'),
         ('preferences', '0003_alter_preferences_id'),
     ]
 

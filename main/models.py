@@ -27,6 +27,7 @@ class AllowedEmail(models.Model):
 
 
 class SitePreferences(Preferences):
+    # @see https://github.com/praekelt/django-preferences
     # Site title
     site_title = models.CharField(max_length=80, default=settings.SITE_TITLE)  # pyright: ignore [reportArgumentType]
 
