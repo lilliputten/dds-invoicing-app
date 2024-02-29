@@ -4,26 +4,28 @@ from django.shortcuts import redirect, render
 from django.http import HttpRequest, HttpResponse
 from django.template import loader
 from django.shortcuts import render
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import render
 from django.contrib import messages
 #  from django.core.mail import send_mail
 from django.contrib.sites.models import Site
-#  from django.contrib.sites.managers import CurrentSiteManager
+from preferences import preferences
 
-from django.views.generic import DetailView, CreateView, UpdateView, ListView, DeleteView, TemplateView
+from django.views.generic import TemplateView
 
 #  from core.helpers.debug_helpers import get_all_object_props, get_object_entry_names, get_object_entry_names_and_types, get_object_props
 from core.helpers.logger import DEBUG
-from core.helpers.utils import capitalize_id, getTrace
+from core.helpers.utils import getTrace
 
-from .ApplicationForm import ApplicationClientForm
+from .application_helpers import get_and_update_application_from_request, pass_form_errors_to_messages
 from .models import Application
 
 
-#  # DEMO: Useing native django logger
+#  # DEMO: Using native django logger
 #  import logging
 #  LOG = logging.getLogger(__name__)
-#  LOG.info('Test')
+#  LOG.debug('Test', {
+#      'allow_only_listed_emails': preferences.SitePreferences.allow_only_listed_emails,
+#  })
 
 
 """
@@ -33,6 +35,7 @@ Save form:
 
 
 #  # DEMO: Class-based template demo
+#  # Use as: ` path("application/<str:pk>/", views.DetailView.as_view(), name="detail")`
 #  class DetailView(generic.DetailView):
 #      model = Application
 #      template_name = "detail.html"
@@ -42,75 +45,81 @@ def components_demo(request: HttpRequest):
     return render(request, "components-demo.django")
 
 
-def review_application(request: HttpRequest, application_id: str):
-    # Find application by id...
-    application = get_object_or_404(Application, pk=application_id)
-    form = ApplicationClientForm(instance=application)
-    context = {"application": application, "form": form}
-    return render(request, "review-application.html.django", context)
-
-
-def create_new_application(request: HttpRequest):
+def edit_application(request: HttpRequest, application_id: str | None = ''):
     try:
-        #  raise Exception("Check exception")  # DEBUG
-        form = None
-        if request.method == "POST":
-            form = ApplicationClientForm(request.POST)
-            if form.is_valid():
-                application = form.instance
-                cleaned_data = form.cleaned_data
-                DEBUG(getTrace('Saving data'), {
-                    # 'form': form,
-                    'application': application,
-                    'cleaned_data': cleaned_data,
-                })
-                application.save()
-                # TODO: Process the data in form.cleaned_data as required ... redirect to a new URL:
-                DEBUG(getTrace('Application successfully added: Redirect to application:review_application'))
-                # Pass success nessage
-                messages.success(request, 'Application for email {} has successfully added.'.format(application.email))
-                return redirect('application:review_application', application_id=application.id)
-            else:
-                errors = form.errors
-                # TODO: Show errors?
-                # Eg: {'name': ['This field is required.'], 'email': ['This field is required.']}
-                DEBUG(getTrace('Form has errors'), {
-                    # 'errors': errors,  # NOTE: This dump is huge (`!!python/object/new:django.forms.utils.ErrorDict`)
-                })
-                # Pass messages to client...
-                for error, texts in form.errors.items():  # pyright: ignore [reportOptionalMemberAccess]
-                    msg = capitalize_id(error) + ': ' + ' '.join(texts)
-                    messages.error(request, msg)
-        # If no form created from request, then create new one...
-        DEBUG(getTrace('Render new form'))
+        (updated, in_db, form, application) = get_and_update_application_from_request(request, application_id)
+        DEBUG(getTrace('edit_application: Result'), {
+            'updated': updated,
+            'in_db': in_db,
+            'application': application,
+            #  'form': form,
+        })
+        if updated and application:
+            # Pass success nessage
+            messages.success(
+                request,
+                'Application for email {} ({}) has successfully updated.'.format(
+                    application.email,
+                    application.name))
+            # TODO: Go to next state page?
+            return redirect('application:edit_application', application_id=application.id)
         if not form:
-            # Create empty application...
-            application = Application()
-            #  # DEBUG: Provide some test data for a fresh application...
-            #  application.name = 'Test'  # pyright: ignore [reportAttributeAccessIssue]
-            #  application.option_hackaton = True
-            #  application.payment_method = 'INVOICE'
-            #  application.save()
-            form = ApplicationClientForm(instance=application)
-        fields = form.fields
-        context = {
-            "form": form,
-            #  # NOTE: These data are accessible via templatetags `form_field_type`, `form_select_choices`
-            #  "field_types": {id: fields[id].widget.__class__.__name__ for id in fields},
-            #  "select_choices": {id: fields[id].choices if fields[id].widget.__class__.__name__ == 'Select' else None
-            #                     for id in fields},
-        }
-        DEBUG(getTrace('Rendering...'))
-        return render(request, "new-application-form.html.django", context)
+            raise Exception('No application form found')
+        context = {"form": form, "updated": updated, "in_db": in_db}
+        pass_form_errors_to_messages(request, form)
+        return render(request, "edit_application.html.django", context)
     except Exception as err:
         #  sError = errors.toString(err, show_stacktrace=False)
         sTraceback = str(traceback.format_exc())
-        DEBUG(getTrace('Caught error'), {
+        DEBUG(getTrace('edit_application: Caught error'), {
             'err': err,
             'traceback': sTraceback,
         })
         raise err
-        # TODO: Return error page
+        #  TODO: Return error page
+        #  raise Http500("Question does not exist")
+        #  return HttpResponse(status=500)
+
+
+def create_new_application(request: HttpRequest):
+    try:
+        (updated, in_db, form, application) = get_and_update_application_from_request(request)
+        DEBUG(getTrace('create_new_application: Result'), {
+            'updated': updated,
+            'in_db': in_db,
+            'application': application,
+            #  'form': form,
+        })
+        # If application already updated...
+        if updated and application:
+            # Pass success nessage
+            messages.success(
+                request,
+                'Application for email {} ({}) has successfully added.'.format(
+                    application.email,
+                    application.name))
+            # TODO: Go to next state page...
+            return redirect('application:edit_application', application_id=application.id)
+        # Else: no application updated...
+        if not form:
+            raise Exception('No application form found')
+        DEBUG(getTrace('create_new_application: Render new form'))
+        context = {"form": form, "updated": updated, "in_db": in_db}
+        pass_form_errors_to_messages(request, form)
+        DEBUG(getTrace('create_new_application: Rendering...'))
+        if request.method == "POST":
+            return render(request, "edit_application.html.django", context)
+        return render(request, "create_new_application.html.django", context)
+    except Exception as err:
+        #  sError = errors.toString(err, show_stacktrace=False)
+        sTraceback = str(traceback.format_exc())
+        DEBUG(getTrace('create_new_application: Caught error'), {
+            'err': err,
+            'traceback': sTraceback,
+        })
+        raise err
+        #  TODO: Return error page
+        #  raise Http500("Question does not exist")
         #  return HttpResponse(status=500)
 
 
