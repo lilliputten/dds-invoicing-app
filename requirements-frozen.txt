@@ -4,6 +4,7 @@ Django==5.0.2
 django-appconf==1.0.6
 django-compressor==4.4
 django-livereload-server==0.5.1
+django-preferences==1.0.0
 nodeenv==1.8.0
 numpy==1.26.4
 pyarrow==15.0.0
