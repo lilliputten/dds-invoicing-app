@@ -126,6 +126,8 @@ INSTALLED_APPS = [
     # @see: https://github.com/praekelt/django-preferences
     'preferences',
 
+    'core',
+
     # Local apps...
     'main.apps.MainConfig',
 ]
