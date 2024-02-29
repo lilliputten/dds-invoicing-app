@@ -85,7 +85,7 @@ def DEBUG(title, data=None):
             fileMode = 'wb'  # Clear file on first entry (wb)
         hasLoggedEntries = True
     if logging_options.writeLog:
-        rootPath = settings.ROOT_PATH
+        rootPath = settings.BASE_DIR
         logFile = path.join(rootPath, logging_options.logFileName)
         #  with open(logFile, fileMode, encoding='utf-8') as file:
         with open(logFile, fileMode) as file:
