@@ -10,19 +10,6 @@
   - https://bootstrapdocs.com/v3.3.4/docs/css/#forms
 -->
 
-{% comment %}
-  Eg: {'name': ['This field is required.'], 'email': ['This field is required.']}
-{% if form.errors %}
-  <p>Errors</p>
-  {% for errorId in form.errors %}
-    <div class="alert alert-danger" role="alert">
-      <strong>{{ errorId|capitalize_id_title }}:</strong>
-      {{ form.errors|getattr:errorId }}
-    </div>
-  {% endfor %}
-{% endif %}
-{% endcomment %}
-
 {% if messages %}
   {% for message in messages %}
     {% if message.tags == 'error' %}
@@ -38,10 +25,18 @@
   {% endfor %}
 {% endif %}
 
+{% comment %}
+  <!-- DEBUG -->
+  <pre>{% for fieldId in form.fields %}{% with type=form|form_field_type:fieldId %}
+  - {{ fieldId }} ({{ type }}) = {{ form.instance|getattr:fieldId }}
+
+  {% endwith %}{% endfor %}
+
+  {{ form.instance.options }}
+  </pre>
+{% endcomment %}
+
 {% for fieldId in form.fields %}
-  {% comment %}
-  {% with type=field_types|dict_key:fieldId %}
-  {% endcomment %}
   {% with type=form|form_field_type:fieldId %}
     {% comment %}
       {{ fieldId }} / {{ fieldId|capitalize_id_title }}: {{ form.instance|getattr:fieldId }}
@@ -59,6 +54,18 @@
           value="{{ form.instance|getattr:fieldId }}"
         />
       </div>
+    {% elif type == "Textarea" %}
+      {% comment %} <div>TEXT [{{ fieldId}}] {{ fieldId|capitalize_id_title }}</div> {% endcomment %}
+      <div class="form-group{% if fieldId in form.errors %} has-error{% endif %}">
+        <label for="@{{ fieldId }}">{{ fieldId|capitalize_id_title }}</label>
+        <textarea
+          name="{{ fieldId }}"
+          id="@{{ fieldId }}"
+          class="form-control"
+          placeholder="{{ fieldId|capitalize_id_title }}"
+          rows="3"
+          >{{ form.instance|getattr:fieldId }}</textarea>
+      </div>
     {% elif type == "CheckboxInput" %}
       {% comment %} <div>CHECKBOX [{{ fieldId}}] {{ fieldId|capitalize_id_title }}</div> {% endcomment %}
       <div class="checkbox{% if fieldId in form.errors %} has-error{% endif %}">
@@ -72,7 +79,7 @@
           {{ fieldId|capitalize_id_title }}
         </label>
       </div>
-    {% elif type == "Select" %}
+    {% elif type == "Select" or type == "SelectMultiple" %}
       {% comment %} <div>SELECT [{{ fieldId}}] {{ fieldId|capitalize_id_title }} = {{ form.instance|getattr:fieldId }}</div> {% endcomment %}
       <div class="form-group{% if fieldId in form.errors %} has-error{% endif %}">
         <label for="@{{ fieldId }}">{{ fieldId|capitalize_id_title }}</label>
@@ -80,10 +87,8 @@
           name="{{ fieldId }}"
           id="@{{ fieldId }}"
           class="form-control"
+          {% if type == "SelectMultiple" %}multiple{% endif %}
         >
-          {% comment %}
-          {% with choices=select_choices|dict_key:fieldId %}
-          {% endcomment %}
           {% with choices=form|form_select_choices:fieldId %}
             {% for choice in choices %}
             <option value="{{ choice.0 }}" {% if choice.0 == form.instance|getattr:fieldId %}selected{% endif %}>{{ choice.1 }}</option>
@@ -91,6 +96,56 @@
           {% endwith %}
         </select>
       </div>
+    {% else %}
+      <!--
+      -->
+        Unknown field type: {{ fieldId }} ({{ type }}) = {{ form.instance|getattr:fieldId }}
     {% endif %}
   {% endwith %}
 {% endfor %}
+
+{% comment %}
+
+Manually generated options control (instead of automatic one):
+
+<!-- Options select from admin panel -->
+<div class="form-group">
+  <label for="@options">Options</label>
+  <select name="options" id="@options" class="form-control" multiple="">
+      <option value="6f285514-7113-4634-ae82-55569f46a500">T-Shirt</option>
+      <option value="9fe9935e-eca7-4729-84b1-e9de7a9b015e">Hackaton</option>
+      <option value="9ca087f6-2699-488f-8f56-efda8c594692">Hot drinks</option>
+  </select>
+</div>
+
+<!-- Manual options list (select:multiple) -->
+{% if event_options %}
+  <select name="options" id="id_options" multiple>
+    {% for option in event_options %}
+      <option value="{{ option.id }}" {% if option.id|is_in_list:option_ids %}selected{% endif %}>
+        {{ option.name }}
+      </option>
+    {% endfor %}
+  </select>
+{% endif %}
+{% endcomment %}
+
+<!-- Manual options list(checkboxes) -->
+{% if event_options %}
+  <div class="form-group">
+    <label>Options</label>
+    {% for option in event_options %}
+      <div class="checkbox">
+        <label>
+          <input
+            name="options"
+            type="checkbox"
+            value="{{ option.id }}"
+            {% if option.id|is_in_list:option_ids %}checked{% endif %}
+          >
+          {{ option.name }}
+        </label>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}

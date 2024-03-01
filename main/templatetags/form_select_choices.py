@@ -6,4 +6,7 @@ from django.forms import ModelForm
 def form_select_choices(form: ModelForm, id: str):
     '''Return form field choices'''
     fields = form.fields
-    return fields[id].choices if fields[id].widget.__class__.__name__ == 'Select' else None
+    return fields[id].choices \
+        if fields[id].widget.__class__.__name__ == 'SelectMultiple' \
+        or fields[id].widget.__class__.__name__ == 'Select' \
+        else None

@@ -2,11 +2,13 @@ from django.db import models
 from preferences.models import Preferences
 from django.db import models
 from django.conf import settings
-#  from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
-#  from django.contrib.contenttypes.models import ContentType
 import uuid
+#  import datetime
 
 from core.constants.date_time_formats import dateTimeFormat
+
+
+#  now = datetime.datetime.now()
 
 
 # See:
@@ -20,11 +22,17 @@ class EventOption(models.Model):
     name = models.CharField(max_length=80, null=False, blank=False)
     active = models.BooleanField(default=True)  # pyright: ignore [reportArgumentType]
 
+    # TODO: Store active (and default) values in the vent object?
+
+    # TODO: Add default value?
+
     def __str__(self):
         return str(self.name)
 
 
 class Event(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
@@ -50,23 +58,14 @@ class Event(models.Model):
         return str(self.name)
 
 
-#  class AllowedEmail(models.Model):
-#      email = models.EmailField(primary_key=True, max_length=80, null=False, blank=False)
-#      allow_participation = models.BooleanField(default=False)  # pyright: ignore [reportArgumentType]
-#      free_participation = models.BooleanField(default=False)  # pyright: ignore [reportArgumentType]
-#
-#      def __str__(self):
-#          return str(self.email)
-
-
 class Application(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     # Generated:
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     secret_code = models.UUIDField(default=uuid.uuid4)  # , editable=False)
     #  secret_code = models.CharField(max_length=100)  # (generated)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
     # Application to event
     event = models.ForeignKey(
@@ -91,6 +90,7 @@ class Application(models.Model):
 
     # Status:
     STATUSES = (
+        # TODO: Other statuses?
         ("WAITING", "Waiting"),
         ("FINISHED", "Finished"),
     )
@@ -101,13 +101,13 @@ class Application(models.Model):
         ("FINISHED", "Finished"),
     )
     payment_status = models.CharField(max_length=15, choices=PAYMENT_STATUSES, default="WAITING")  # (waiting, finished)
-    # TODO: Update neccessary status values
 
     options = models.ManyToManyField(
         EventOption,
         related_name="application",
     )
 
+    #  # Hardcoded options aren't used anymore: used many-to-many relation with `EventOption` (see above)
     #  # Application options:
     #  option_hackaton = models.BooleanField(default=False)  # pyright: ignore [reportArgumentType]
     #  option_tshirt = models.BooleanField(default=False)  # pyright: ignore [reportArgumentType]
@@ -136,7 +136,7 @@ class SitePreferences(Preferences):
     # Site title
     site_title = models.CharField(max_length=80, default=settings.SITE_TITLE)  # pyright: ignore [reportArgumentType]
 
-    # NOTE: To use `AllowedEmail` to restrict applicants by listed emails only
-    allow_only_listed_emails = models.BooleanField(default=False)  # pyright: ignore [reportArgumentType]
+    #  # NOTE: To use `AllowedEmail` to restrict applicants by listed emails only (UNUSED)
+    #  allow_only_listed_emails = models.BooleanField(default=False)  # pyright: ignore [reportArgumentType]
 
     # TODO: Add other essential parameters...
