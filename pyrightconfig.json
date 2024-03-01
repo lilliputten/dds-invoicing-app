@@ -1,0 +1,10 @@
+{
+  "exclude": [
+    "**/migrations",
+    ".venv",
+    ".vscode",
+    "utils",
+    "node_modules",
+    "static"
+  ]
+}

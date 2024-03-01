@@ -9,7 +9,7 @@ nodeenv==1.8.0
 numpy==1.26.4
 pyarrow==15.0.0
 pycodestyle==2.11.1
-pyright==1.1.351
+pyright==1.1.352
 PyYAML==6.0.1
 rcssmin==1.1.1
 rjsmin==1.2.1

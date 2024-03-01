@@ -9,7 +9,7 @@ from preferences import preferences
 from core.helpers.logger import DEBUG
 from core.helpers.utils import capitalize_id, getTrace
 
-from .ApplicationForm import ApplicationClientForm
+from .forms import ApplicationClientForm
 from .models import Application, AllowedEmail
 
 
@@ -31,7 +31,7 @@ def pass_form_errors_to_messages(request: HttpRequest, form: ModelForm):
         messages.error(request, msg)
 
 
-def get_and_update_application_from_request(request: HttpRequest, application_id: str = ''):
+def get_and_update_application_from_request(request: HttpRequest, application_id: str | None = ''):
     """
     Create application and form:
     - From db if passed `application_id`.
@@ -68,7 +68,6 @@ def get_and_update_application_from_request(request: HttpRequest, application_id
             DEBUG(getTrace('get_and_update_application_from_request: Created form'), {
                 'application_id': application_id,
                 'application': application,
-                #  'form': form,
             })
             # Is the form well-formed?
             if form.is_valid():
@@ -76,14 +75,14 @@ def get_and_update_application_from_request(request: HttpRequest, application_id
                 application = form.instance
                 cleaned_data = form.cleaned_data
                 # TODO: Check email against allow_only_listed_emails and AllowedEmail
-                allow_only_listed_emails = preferences.SitePreferences.allow_only_listed_emails
-                allowed_emails = AllowedEmail.objects.filter(
+                allow_only_listed_emails = \
+                    preferences.SitePreferences.allow_only_listed_emails  # pyright: ignore [reportAttributeAccessIssue]
+                allowed_emails = AllowedEmail.objects.filter(  # pyright: ignore [reportAttributeAccessIssue]
                     allow_participation=True)  # pyright: ignore [reportAttributeAccessIssue]
                 DEBUG(getTrace('get_and_update_application_from_request: Saving data'), {
                     'application': application,
                     'cleaned_data': cleaned_data,
                     'allow_only_listed_emails': allow_only_listed_emails,
-                    #  'form': form,
                 })
                 # If 'only allowed emails' mode has used...
                 if allow_only_listed_emails:

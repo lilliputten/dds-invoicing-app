@@ -8,5 +8,6 @@ recursive = true
 aggressive = 3
 
 [tool.pyright]
+# @see https://microsoft.github.io/pyright/#/configuration
 venvPath = "."
 venv = ".venv"
