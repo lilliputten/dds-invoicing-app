@@ -6,7 +6,7 @@ from .models import Application
 class ApplicationClientForm(ModelForm):
     class Meta:
         model = Application
-        exclude = ('id', 'secret_code', 'status', 'payment_status')
+        exclude = ('id', 'event', 'secret_code', 'status', 'payment_status')
         fields = '__all__'
 
 

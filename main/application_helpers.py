@@ -10,7 +10,8 @@ from core.helpers.logger import DEBUG
 from core.helpers.utils import capitalize_id, getTrace
 
 from .forms import ApplicationClientForm
-from .models import Application, AllowedEmail
+from .models import Application
+#  from .models import AllowedEmail
 
 
 # @see:
@@ -74,39 +75,40 @@ def get_and_update_application_from_request(request: HttpRequest, application_id
                 doSave = True
                 application = form.instance
                 cleaned_data = form.cleaned_data
-                # TODO: Check email against allow_only_listed_emails and AllowedEmail
-                allow_only_listed_emails = \
-                    preferences.SitePreferences.allow_only_listed_emails  # pyright: ignore [reportAttributeAccessIssue]
-                allowed_emails = AllowedEmail.objects.filter(  # pyright: ignore [reportAttributeAccessIssue]
-                    allow_participation=True)  # pyright: ignore [reportAttributeAccessIssue]
+                #  # TODO: Check email against allow_only_listed_emails and AllowedEmail
+                #  allow_only_listed_emails = \
+                #      preferences.SitePreferences.allow_only_listed_emails  # pyright: ignore [reportAttributeAccessIssue]
+                #  allowed_emails = AllowedEmail.objects.filter(  # pyright: ignore [reportAttributeAccessIssue]
+                #      allow_participation=True)  # pyright: ignore [reportAttributeAccessIssue]
                 DEBUG(getTrace('get_and_update_application_from_request: Saving data'), {
                     'application': application,
                     'cleaned_data': cleaned_data,
-                    'allow_only_listed_emails': allow_only_listed_emails,
+                    #  'allow_only_listed_emails': allow_only_listed_emails,
                 })
-                # If 'only allowed emails' mode has used...
-                if allow_only_listed_emails:
-                    # Check if current email is in the list of available ones...
-                    allowed_emails_list = list(map(lambda item: item.email, allowed_emails))
-                    email = application.email
-                    is_email_allowed = email in allowed_emails_list
-                    DEBUG(getTrace('get_and_update_application_from_request: Check email...'), {
-                        'allowed_emails_list': allowed_emails_list,
-                        'email': email,
-                        'is_email_allowed': is_email_allowed,
-                        'allow_only_listed_emails': allow_only_listed_emails,
-                        'allowed_emails': allowed_emails,
-                    })
-                    if not is_email_allowed:
-                        doSave = False
-                        DEBUG(getTrace('get_and_update_application_from_request: Email is not allowed'), {
-                            'email': email,
-                            'allowed_emails_list': allowed_emails_list,
-                            'is_email_allowed': is_email_allowed,
-                        })
-                        messages.error(
-                            request, 'This email cannot participate in the event, we are sorry.'.format(
-                                application.email, application.name))
+                # TODO: Update logic to use `event.allowed_emails`
+                #  # If 'only allowed emails' mode has used...
+                #  if allow_only_listed_emails:
+                #      # Check if current email is in the list of available ones...
+                #      allowed_emails_list = list(map(lambda item: item.email, allowed_emails))
+                #      email = application.email
+                #      is_email_allowed = email in allowed_emails_list
+                #      DEBUG(getTrace('get_and_update_application_from_request: Check email...'), {
+                #          'allowed_emails_list': allowed_emails_list,
+                #          'email': email,
+                #          'is_email_allowed': is_email_allowed,
+                #          'allow_only_listed_emails': allow_only_listed_emails,
+                #          'allowed_emails': allowed_emails,
+                #      })
+                #      if not is_email_allowed:
+                #          doSave = False
+                #          DEBUG(getTrace('get_and_update_application_from_request: Email is not allowed'), {
+                #              'email': email,
+                #              'allowed_emails_list': allowed_emails_list,
+                #              'is_email_allowed': is_email_allowed,
+                #          })
+                #          messages.error(
+                #              request, 'This email cannot participate in the event, we are sorry.'.format(
+                #                  application.email, application.name))
                 if doSave:
                     application.save()
                     # TODO: Process the data in form.cleaned_data as required ... redirect to a new URL:

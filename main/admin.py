@@ -2,7 +2,7 @@ from django import forms
 from django.contrib import admin
 from preferences.admin import PreferencesAdmin
 
-from .models import Application, AllowedEmail, SitePreferences
+from .models import Event, Application, EventOption,  SitePreferences
 
 
 # @see:
@@ -27,15 +27,30 @@ class ApplicationAdmin(admin.ModelAdmin):
     search_fields = ('name__startswith', 'email')
     form = ApplicationAdminForm
 
-    list_display = ('id', 'name', 'email', 'created_at', 'updated_at')
+    list_display = ('id', 'status', 'name', 'email', 'created_at', 'updated_at')
 
 
-class AllowedEmailsAdmin(admin.ModelAdmin):
-    search_fields = ('email', )
+#  class AllowedEmailsAdmin(admin.ModelAdmin):
+#     search_fields = ('email', )
+#     list_display = ('email', 'allow_participation', 'free_participation')
 
-    list_display = ('email', 'allow_participation', 'free_participation')
+
+class EventsAdmin(admin.ModelAdmin):
+    search_fields = ('name', 'description')
+    list_display = ('name', 'status', 'options_list', 'id')
+
+    def options_list(self, obj):
+        return "\n".join([p.name for p in obj.options.all()])
 
 
+class EventOptionsAdmin(admin.ModelAdmin):
+    search_fields = ('name', )
+    list_display = ('name', 'active')
+
+
+#  admin.site.register(AllowedEmail, AllowedEmailsAdmin)
+
+admin.site.register(EventOption, EventOptionsAdmin)
+admin.site.register(Event, EventsAdmin)
 admin.site.register(Application, ApplicationAdmin)
-admin.site.register(AllowedEmail, AllowedEmailsAdmin)
 admin.site.register(SitePreferences, PreferencesAdmin)
