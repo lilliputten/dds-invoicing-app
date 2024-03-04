@@ -29,9 +29,7 @@
   <!-- DEBUG -->
   <pre>{% for fieldId in form.fields %}{% with type=form|form_field_type:fieldId %}
   - {{ fieldId }} ({{ type }}) = {{ form.instance|getattr:fieldId }}
-
   {% endwith %}{% endfor %}
-
   {{ form.instance.options }}
   </pre>
 {% endcomment %}
@@ -118,7 +116,7 @@ Manually generated options control (instead of automatic one):
   </select>
 </div>
 
-<!-- Manual options list (select:multiple) -->
+<!-- Manual options list (select/multiple) -->
 {% if event_options %}
   <select name="options" id="id_options" multiple>
     {% for option in event_options %}
@@ -128,6 +126,7 @@ Manually generated options control (instead of automatic one):
     {% endfor %}
   </select>
 {% endif %}
+
 {% endcomment %}
 
 <!-- Manual options list(checkboxes) -->
