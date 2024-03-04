@@ -140,9 +140,9 @@ def get_and_update_application_from_request(request: HttpRequest, application_id
             posted_options = request.POST.getlist('options') if has_post_data and 'options' in request.POST else None
             DEBUG(getTrace('get_and_update_application_from_request: Result'), {
                 'option_ids': option_ids,
-                'options': options,
-                'event_options': event_options,
-                'context': context,
+                #  'options': options,
+                #  'event_options': event_options,
+                #  'context': context,
                 'updated': updated,
                 'in_db': in_db,
                 'has_post_data': has_post_data,
