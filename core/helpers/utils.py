@@ -90,7 +90,7 @@ def getTrace(appendStr=None):
     #  funcName = lastTrace[2]
     strList = [
         '@',
-        __name__,
+        # __name__,
         # NOTE: This code isn't supposed for production mode (at least for Django v.5.0.2)
         #  modName,
         #  funcName,

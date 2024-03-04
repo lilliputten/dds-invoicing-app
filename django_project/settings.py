@@ -270,13 +270,13 @@ LOGGING = {
         'django': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': posixpath.join(BASE_DIR, 'log-django.log'),
+            'filename': posixpath.join(BASE_DIR, 'log-django.txt'),
             'formatter': 'verbose'
         },
         'apps': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': posixpath.join(BASE_DIR, 'log-apps.log'),
+            'filename': posixpath.join(BASE_DIR, 'log-apps.txt'),
             'formatter': 'verbose'
         },
     },
