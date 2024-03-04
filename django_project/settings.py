@@ -31,11 +31,12 @@ LOCAL = LOCAL_RUN and RUNNING_DEVSERVER
 DEV = LOCAL
 DEBUG = LOCAL  # and DEV
 
-print('RUNNING_DEVSERVER', RUNNING_DEVSERVER)
-print('RUNNING_MANAGE_PY', RUNNING_MANAGE_PY)
-print('RUNNING_MOD_WSGI', RUNNING_MOD_WSGI)
-print('LOCAL', LOCAL)
-print('DEV', DEV)
+# # DEBUG
+# print('RUNNING_DEVSERVER', RUNNING_DEVSERVER)
+# print('RUNNING_MANAGE_PY', RUNNING_MANAGE_PY)
+# print('RUNNING_MOD_WSGI', RUNNING_MOD_WSGI)
+# print('LOCAL', LOCAL)
+# print('DEV', DEV)
 
 # Try to compile js & css resources on-the-fly, alternatively it's
 # possible to use `livereload-assets-server` (see below)
@@ -271,13 +272,13 @@ LOGGING = {
         'django': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': posixpath.join(BASE_DIR, 'log-django.log'),
+            'filename': posixpath.join(BASE_DIR, 'log-django.txt'),
             'formatter': 'verbose'
         },
         'apps': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': posixpath.join(BASE_DIR, 'log-apps.log'),
+            'filename': posixpath.join(BASE_DIR, 'log-apps.txt'),
             'formatter': 'verbose'
         },
     },

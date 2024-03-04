@@ -20,25 +20,10 @@ from .application_helpers import get_and_update_application_from_request, pass_f
 from .models import Application
 
 
-#  # DEMO: Using native django logger
-#  import logging
-#  LOG = logging.getLogger(__name__)
-#  LOG.debug('Test', {
-#      'allow_only_listed_emails': preferences.SitePreferences.allow_only_listed_emails,
-#  })
-
-
 """
 Save form:
     formset = ApplicationFormSet(request.POST)
 """
-
-
-#  # DEMO: Class-based template demo
-#  # Use as: ` path("application/<str:pk>/", views.DetailView.as_view(), name="detail")`
-#  class DetailView(generic.DetailView):
-#      model = Application
-#      template_name = "detail.html"
 
 
 def components_demo(request: HttpRequest):
@@ -47,12 +32,12 @@ def components_demo(request: HttpRequest):
 
 def edit_application(request: HttpRequest, application_id: str | None = ''):
     try:
-        (updated, in_db, form, application) = get_and_update_application_from_request(request, application_id)
+        (updated, in_db, form, application, context) = get_and_update_application_from_request(request, application_id)
         DEBUG(getTrace('edit_application: Result'), {
             'updated': updated,
             'in_db': in_db,
-            'application': application,
-            #  'form': form,
+            # 'application': application,
+            # 'form': form,
         })
         if updated and application:
             # Pass success nessage
@@ -65,7 +50,6 @@ def edit_application(request: HttpRequest, application_id: str | None = ''):
             return redirect('application:edit_application', application_id=application.id)
         if not form:
             raise Exception('No application form found')
-        context = {"form": form, "updated": updated, "in_db": in_db}
         pass_form_errors_to_messages(request, form)
         return render(request, "edit_application.html.django", context)
     except Exception as err:
@@ -83,7 +67,7 @@ def edit_application(request: HttpRequest, application_id: str | None = ''):
 
 def create_new_application(request: HttpRequest):
     try:
-        (updated, in_db, form, application) = get_and_update_application_from_request(request)
+        (updated, in_db, form, application, context) = get_and_update_application_from_request(request)
         DEBUG(getTrace('create_new_application: Result'), {
             'updated': updated,
             'in_db': in_db,
@@ -104,7 +88,6 @@ def create_new_application(request: HttpRequest):
         if not form:
             raise Exception('No application form found')
         DEBUG(getTrace('create_new_application: Render new form'))
-        context = {"form": form, "updated": updated, "in_db": in_db}
         pass_form_errors_to_messages(request, form)
         DEBUG(getTrace('create_new_application: Rendering...'))
         if request.method == "POST":
@@ -123,19 +106,6 @@ def create_new_application(request: HttpRequest):
         #  return HttpResponse(status=500)
 
 
-def index(request: HttpRequest):
-    #  return HttpResponse("Hello, world. You're at the main index.")  # pyright: ignore [reportArgumentType]
-    latest_application_list = Application.objects.order_by(  # pyright: ignore [reportAttributeAccessIssue]
-        "-created_at")[:5]
-    #  output = ", ".join([q.email for q in latest_application_list])
-    #  return HttpResponse(output)
-    context = {
-        "latest_application_list": latest_application_list,
-    }
-    template = loader.get_template("index.html.django")
-    return HttpResponse(template.render(context, request))
-
-
 class RobotsView(TemplateView):
 
     template_name = 'robots.txt'
@@ -145,6 +115,7 @@ class RobotsView(TemplateView):
         context = super(RobotsView, self).get_context_data(**kwargs)
         context['domain'] = Site.objects.get_current().domain
         return context
+
 
 # Error pages...
 
@@ -174,4 +145,4 @@ def page500(request, *args, **argv):
 
 
 # Other errors:
-# 502: Gateway Timeout
+# 502: Gateway Timeout?

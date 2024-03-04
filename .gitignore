@@ -31,7 +31,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
-/log.txt
+/log*.txt
 
 # Local files
 /utils/config-local.sh
