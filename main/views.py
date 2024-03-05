@@ -115,8 +115,8 @@ def activate_application(request: HttpRequest, application_id: UUID, secret_code
                     # Send success message to the client...
                     messages.success(request, 'The application successfully activated')
                     # Save this application as 'current'...
-                    request.session['application_id'] = str(
-                        application.id)  # pyright: ignore [reportAttributeAccessIssue]
+                    request.session['application_id'] = str(  # pyright: ignore [reportAttributeAccessIssue]
+                        application.id)
                     success = True
         context = {
             'application_id': application_id,
@@ -155,6 +155,8 @@ def edit_application(request: HttpRequest, application_id: UUID | None = None, e
                 'Application for email {} ({}) has successfully updated.'.format(
                     application.email,
                     application.name))
+            request.session['application_id'] = str(  # pyright: ignore [reportAttributeAccessIssue]
+                application.id)
             # TODO: Go to next state page?
             return redirect('application:show_application_state')  # , application_id=application.id)
         if not form:
