@@ -6,6 +6,10 @@ body {
   background-color: #fff;
   margin-top: 70px;
 }
+.item-label,
+.text-info {
+  opacity: 0.5;
+}
 /**
  * @module debug
  */
