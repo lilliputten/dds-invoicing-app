@@ -1,0 +1,7 @@
+from django.template.defaultfilters import register
+
+
+@register.filter(name='map_key')
+def map_key(l: list, k: str):
+    '''Returns the given key from a dictionary.'''
+    return list(map(lambda item: str(item.__dict__[k]), l))

@@ -1,0 +1,46 @@
+{# ex: set ft=htmldjango : #}
+{% extends "!base-main.html.django" %}
+
+{% block title %}Generic info &mdash; {{ block.super }}{% endblock %}
+
+{% block page_body %}
+{{ block.super }}
+
+<fieldset>
+  <legend>
+    <h1>Generic info</h1>
+  </legend>
+  {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+</fieldset>
+
+<p>Here should be some info about the application and the applying procedure.</p>
+
+<hr>
+
+<h4>DEBUG:</h4>
+<ul>
+  <li><span class="item-label">First available event:</span> {{ first_event }}</li>
+  <li><span class="item-label">Current application id:</span> {{ application_id }}</li>
+  {% if application_id and application %}
+    <li><span class="item-label">Edit current application link:</span> <a href="{% url 'application:edit_application' application_id=application_id %}">
+      {% url 'application:edit_application' application_id=application_id %}
+    </a></li>
+    <li><span class="item-label">Show current application status:</span> <a href="{% url 'application:show_application_state' %}">
+      {% url 'application:show_application_state' %}
+    </a></li>
+    {% if application.status == 'WAITING' %}
+      <li><span class="item-label">Activate current application link:</span> <a href="{% url 'application:activate_application' application_id=application.id secret_code=application.secret_code %}">
+        {% url 'application:activate_application' application_id=application.id secret_code=application.secret_code %}
+      </a></li>
+    {% endif %}
+  {% endif %}
+  <li><span class="item-label">Application:</span> {{ application }}</li>
+  <li><span class="item-label">Application event:</span> {{ application_event }}</li>
+  {% if first_event %}
+    <li><span class="item-label">Demo create new applicaiton link:</span> <a href="{% url 'application:create_new_application' event_id=first_event.id %}">
+      {% url 'application:create_new_application' event_id=first_event.id %}
+    </a></li>
+  {% endif %}
+</ul>
+
+{% endblock page_body %}

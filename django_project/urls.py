@@ -32,7 +32,7 @@ if settings.DEBUG:
     urlpatterns += static(settings.ASSETS_URL, document_root=settings.ASSETS_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-#  # TODO: Add different location depnding on dev/prod mode (see examples below)...
+#  # TODO: Add different location depending on dev/prod mode (see examples below)...
 #  if settings.DEBUG:
 #      pass
 #      urlpatterns += patterns(
