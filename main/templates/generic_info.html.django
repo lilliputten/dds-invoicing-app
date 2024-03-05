@@ -13,6 +13,8 @@
   {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 </fieldset>
 
+{% include "blocks/render-messages/render-messages.django" %}
+
 <p>Here should be some info about the application and the applying procedure.</p>
 
 <hr>
