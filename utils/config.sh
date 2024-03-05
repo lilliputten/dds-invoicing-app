@@ -10,7 +10,7 @@ DIST_BRANCH="publish" # Production build -> html-app-build
 
 # Use the repo from `.git/config`
 DIST_REPO="git@github.com:lilliputten/dds-invoicing-app.git"
-SRC_TAG_PREFIX="server" # "v" for default tags like "v.X.Y.Z"
+SRC_TAG_PREFIX="v" # "v" for default tags like "v.X.Y.Z"
 
 PUBLISH_FOLDER="client.build" # "$DIST_BRANCH"
 PUBLISH_TAG_ID="client.build" # "$DIST_BRANCH"
