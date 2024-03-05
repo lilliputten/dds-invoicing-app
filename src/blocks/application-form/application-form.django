@@ -10,20 +10,7 @@
   - https://bootstrapdocs.com/v3.3.4/docs/css/#forms
 -->
 
-{% if messages %}
-  {% for message in messages %}
-    {% if message.tags == 'error' %}
-      <div class="alert alert-danger alert-dismissible" role="alert">
-        <strong>{{ message }}</strong>
-      </div>
-    {% endif %}
-    {% if message.tags == 'success' %}
-      <div class="alert alert-success alert-dismissible" role="alert">
-        <strong>{{ message }}</strong>
-      </div>
-    {% endif %}
-  {% endfor %}
-{% endif %}
+{% include "blocks/render-messages/render-messages.django" %}
 
 {% comment %}
   <!-- DEBUG -->

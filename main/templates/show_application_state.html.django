@@ -1,0 +1,39 @@
+{# ex: set ft=htmldjango : #}
+{% extends "!base-regular.html.django" %}
+
+{% block title %}Application state &mdash; {{ block.super }}{% endblock %}
+
+{% block page_body %}
+{{ block.super }}
+
+<fieldset>
+  <legend>
+    <h1>Application state</h1>
+  </legend>
+  {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+</fieldset>
+
+<h3>Status:</h3>
+
+{% include "blocks/application-status/application-status.django" %}
+
+<h3>Properties:</h3>
+
+{% include "blocks/application-info/application-info.django" %}
+
+<h4>DEBUG:</h4>
+<ul>
+  <li><span class="item-label">Current application id:</span> {{ application_id }}</li>
+  {% if application %}
+    <li><span class="item-label">Edit current application link:</span> <a href="{% url 'application:edit_application' application_id=application.id %}">
+      {% url 'application:edit_application' application_id=application.id %}
+    </a></li>
+    {% if application.status == 'WAITING' %}
+      <li><span class="item-label">Activate current application link:</span> <a href="{% url 'application:activate_application' application_id=application.id secret_code=application.secret_code %}">
+        {% url 'application:activate_application' application_id=application.id secret_code=application.secret_code %}
+      </a></li>
+    {% endif %}
+  {% endif %}
+</ul>
+
+{% endblock page_body %}

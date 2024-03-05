@@ -3,6 +3,7 @@ from preferences.models import Preferences
 from django.db import models
 from django.conf import settings
 import uuid
+from uuid import UUID
 #  import datetime
 
 from core.constants.date_time_formats import dateTimeFormat
@@ -44,6 +45,7 @@ class Event(models.Model):
         related_name="event",
     )
 
+    # TODO: Add check for correct event status!
     STATUSES = (
         ("WAITING", "Waiting"),
         ("ACTIVE", "Active"),
@@ -59,13 +61,13 @@ class Event(models.Model):
 
 
 class Application(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
     # Generated:
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     secret_code = models.UUIDField(default=uuid.uuid4)  # , editable=False)
     #  secret_code = models.CharField(max_length=100)  # (generated)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     # Application to event
     event = models.ForeignKey(
@@ -91,14 +93,16 @@ class Application(models.Model):
     # Status:
     STATUSES = (
         # TODO: Other statuses?
-        ("WAITING", "Waiting"),
-        ("FINISHED", "Finished"),
+        ("WAITING", "Waiting for activation"),
+        ("PAYMENT", "Waiting for payment"),
+        ("ACTIVE", "Active"),
+        ("CLOSED", "Closed"),
     )
     status = models.CharField(max_length=15, choices=STATUSES, default="WAITING")  # (waiting, finished)
     PAYMENT_STATUSES = (
         # TODO: Not required?
         ("WAITING", "Waiting"),
-        ("FINISHED", "Finished"),
+        ("OK", "Ok"),
     )
     payment_status = models.CharField(max_length=15, choices=PAYMENT_STATUSES, default="WAITING")  # (waiting, finished)
 
@@ -111,6 +115,11 @@ class Application(models.Model):
     #  # Application options:
     #  option_hackaton = models.BooleanField(default=False)  # pyright: ignore [reportArgumentType]
     #  option_tshirt = models.BooleanField(default=False)  # pyright: ignore [reportArgumentType]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # if event_id:
+        #     self.event = Event.objects.get(pk=event_id)  # pyright: ignore [reportAttributeAccessIssue]
 
     def __str__(self):
         """

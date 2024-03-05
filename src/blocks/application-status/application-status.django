@@ -1,0 +1,16 @@
+{# ex: set ft=htmldjango : #}
+
+<div class="application-status">
+  <p class="status">
+    {% if application.status == 'WAITING' %}
+      Waiting for activation.
+    {% elif application.status == 'PAYMENT' %}
+      Waiting for payment.
+    {% elif application.status == 'ACTIVE' %}
+      Active.
+    {% elif application.status == 'CLOSED' %}
+      Closed.
+    {% endif %}
+  </p>
+</div>
+
